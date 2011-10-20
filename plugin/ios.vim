@@ -12,4 +12,4 @@ endif
 
 let s:LibPath = expand('<sfile>:h:h') . '/lib'
 execute "ruby require '" . s:LibPath . "/ios/vim'" 
-ruby IOS::Vim.initialize
+ruby IOS::Vim::initialize

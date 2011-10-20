@@ -1,6 +1,6 @@
 module IOS
   module Vim
-    def self.initialize
+    class AlternateFinder
     end
-  end 
+  end
 end
