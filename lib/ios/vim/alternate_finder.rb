@@ -36,7 +36,7 @@ module IOS
       private :stem
 
       def extension
-        @filename.gsub(/^.*\./, '')
+        Filename.new(@filename).extension
       end
       private :extension
 
