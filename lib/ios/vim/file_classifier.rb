@@ -13,6 +13,7 @@ module IOS
 
       def type
         EXTENSIONS.each {|t, es| return t if es.include? @filename.extension}
+        :unknown
       end
 
       def stem
