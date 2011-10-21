@@ -2,14 +2,14 @@ module IOS
   module Vim
     class AlternateFinder
 
-      HEADER_EXTSIONS = ['h', 'hpp', 'hh', 'H', 'hxx']
+      HEADER_EXTENSIONS = ['h', 'hpp', 'hh', 'H', 'hxx']
 
       def initialize filename
         @filename = filename
       end
 
       def header?
-        HEADER_EXTSIONS.include? extension
+        HEADER_EXTENSIONS.include? extension
       end
 
       def alternate
