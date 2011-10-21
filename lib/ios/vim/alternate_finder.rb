@@ -1,9 +1,15 @@
 module IOS
   module Vim
     class AlternateFinder
-      def alternate_for filename
-        filename.gsub(/\.m/, ".h")
+
+      def initialize filename
+        @filename = filename
       end
+
+      def alternate
+        @filename.gsub(/\.(mm|cpp|m)$/, ".h")
+      end
+
     end
   end
 end

@@ -1,11 +1,12 @@
 require 'ios/vim/alternate_finder'
 
 describe IOS::Vim::AlternateFinder do
+  include IOS::Vim
 
-  subject { IOS::Vim::AlternateFinder.new }
-
-  it "should find a .h from a .m file" do
-    subject.alternate_for('foo/bar.m').should == 'foo/bar.h'
+  it "should find a .h for various source file types" do
+    ['m', 'mm', 'cpp'].each do |ext|
+      IOS::Vim::AlternateFinder.new("foo/bar.#{ext}").alternate.should == 'foo/bar.h'
+    end
   end
 
 end
