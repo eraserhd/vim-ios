@@ -16,6 +16,10 @@ module IOS
         :unknown
       end
 
+      def header?
+        type == :header
+      end
+
       def stem
         @filename.stem
       end

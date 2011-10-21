@@ -22,4 +22,13 @@ describe IOS::Vim::FileClassifier do
     end
   end
 
+  describe '#header?' do
+    it "should return true for headers" do
+      IOS::Vim::FileClassifier.new('foo/bar.h').header?.should be_true
+    end
+    it "should return false for sources" do
+      IOS::Vim::FileClassifier.new('foo/bar.m').header?.should be_false
+    end
+  end
+
 end
