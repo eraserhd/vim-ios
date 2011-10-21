@@ -16,12 +16,8 @@ module IOS
         :unknown
       end
 
-      def header?
-        type == :header
-      end
-
-      def source?
-        type == :source
+      EXTENSIONS.keys.each do |key|
+        define_method("#{key}?") {type == key}
       end
 
       def stem
