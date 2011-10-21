@@ -1,34 +1,31 @@
+require 'ios/vim/file_classifier'
+
 module IOS
   module Vim
     class AlternateFinder
 
-      HEADER_EXTENSIONS = ['h', 'hpp', 'hh', 'H', 'hxx']
+      ALTERNATE_TYPE = {
+        :source => :header,
+        :header => :source
+      }
 
-      def initialize filename
-        @filename = Filename.new filename
-      end
-
-      def header?
-        HEADER_EXTENSIONS.include? @filename.extension
+      def initialize classifier
+        @classifier = classifier
       end
 
       def alternate
-        if header?
-          source_file
-        else
-          header_file
-        end
+        counterpart_of_type alternate_type
       end
 
-      def source_file
-        "#{@filename.stem}.m"
+      def alternate_type
+        ALTERNATE_TYPE[@classifier.type]
       end
-      private :source_file
+      private :alternate_type
 
-      def header_file
-        "#{@filename.stem}.h"
+      def counterpart_of_type type
+        "#{@classifier.stem}.#{FileClassifier::EXTENSIONS[type].first}"
       end
-      private :header_file
+      private :counterpart_of_type
 
     end
   end
