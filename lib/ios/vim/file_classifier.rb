@@ -20,6 +20,10 @@ module IOS
         type == :header
       end
 
+      def source?
+        type == :source
+      end
+
       def stem
         @filename.stem
       end
