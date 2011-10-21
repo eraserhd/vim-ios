@@ -15,6 +15,10 @@ module IOS
         EXTENSIONS.each {|t, es| return t if es.include? @filename.extension}
       end
 
+      def stem
+        @filename.stem
+      end
+
     end
   end
 end

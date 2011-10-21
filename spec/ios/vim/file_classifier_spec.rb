@@ -10,4 +10,8 @@ describe IOS::Vim::FileClassifier do
     IOS::Vim::FileClassifier.new('foo/bar.m').type.should == :source
   end
 
+  it "should give access to the file stem" do
+    IOS::Vim::FileClassifier.new('foo/bar.m').stem.should == 'foo/bar'
+  end
+
 end
