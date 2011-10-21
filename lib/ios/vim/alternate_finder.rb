@@ -2,17 +2,33 @@ module IOS
   module Vim
     class AlternateFinder
 
+      HEADER_EXTSIONS = ['h', 'hpp', 'hh', 'H', 'hxx']
+
       def initialize filename
         @filename = filename
       end
 
+      def header?
+        HEADER_EXTSIONS.include? extension
+      end
+
       def alternate
-        if extension == 'h'
-          "#{stem}.m"
+        if header?
+          source_file
         else
-          "#{stem}.h"
+          header_file
         end
       end
+
+      def source_file
+        "#{stem}.m"
+      end
+      private :source_file
+
+      def header_file
+        "#{stem}.h"
+      end
+      private :header_file
 
       def stem
           @filename.gsub(/\.[a-z]*$/, "")
