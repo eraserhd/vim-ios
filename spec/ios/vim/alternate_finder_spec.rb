@@ -1,5 +1,4 @@
-require 'ios/vim/alternate_finder'
-require 'ios/vim/file_classifier'
+require 'ios/vim'
 
 describe IOS::Vim::AlternateFinder do
 

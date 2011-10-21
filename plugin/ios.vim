@@ -11,5 +11,6 @@ if !has('ruby')
 endif
 
 let s:LibPath = expand('<sfile>:h:h') . '/lib'
-execute "ruby require '" . s:LibPath . "/ios/vim'" 
+execute "ruby $:.push('" . s:LibPath . "')"
+execute "ruby require 'ios/vim'" 
 ruby IOS::Vim::initialize

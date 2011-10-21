@@ -1,4 +1,4 @@
-require 'ios/vim/filename'
+require 'ios/vim'
 
 describe IOS::Vim::Filename do
 

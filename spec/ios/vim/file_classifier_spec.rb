@@ -1,4 +1,4 @@
-require 'ios/vim/file_classifier'
+require 'ios/vim'
 
 describe IOS::Vim::FileClassifier do
 
