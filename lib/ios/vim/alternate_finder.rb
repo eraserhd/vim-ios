@@ -7,8 +7,22 @@ module IOS
       end
 
       def alternate
-        @filename.gsub(/\.(mm|cpp|m)$/, ".h")
+        if extension == 'h'
+          "#{stem}.m"
+        else
+          "#{stem}.h"
+        end
       end
+
+      def stem
+          @filename.gsub(/\.[a-z]*$/, "")
+      end
+      private :stem
+
+      def extension
+        @filename.gsub(/^.*\./, '')
+      end
+      private :extension
 
     end
   end
