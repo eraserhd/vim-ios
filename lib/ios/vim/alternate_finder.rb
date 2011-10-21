@@ -5,11 +5,11 @@ module IOS
       HEADER_EXTENSIONS = ['h', 'hpp', 'hh', 'H', 'hxx']
 
       def initialize filename
-        @filename = filename
+        @filename = Filename.new filename
       end
 
       def header?
-        HEADER_EXTENSIONS.include? extension
+        HEADER_EXTENSIONS.include? @filename.extension
       end
 
       def alternate
@@ -21,24 +21,14 @@ module IOS
       end
 
       def source_file
-        "#{stem}.m"
+        "#{@filename.stem}.m"
       end
       private :source_file
 
       def header_file
-        "#{stem}.h"
+        "#{@filename.stem}.h"
       end
       private :header_file
-
-      def stem
-        Filename.new(@filename).stem
-      end
-      private :stem
-
-      def extension
-        Filename.new(@filename).extension
-      end
-      private :extension
 
     end
   end
