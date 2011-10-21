@@ -31,7 +31,7 @@ module IOS
       private :header_file
 
       def stem
-          @filename.gsub(/\.[a-z]*$/, "")
+        Filename.new(@filename).stem
       end
       private :stem
 

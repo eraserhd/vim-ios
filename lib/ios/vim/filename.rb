@@ -10,6 +10,10 @@ module IOS
         @name.gsub(/^.*\./, '')
       end
 
+      def stem
+        @name.gsub(/\.[a-z]*$/, '')
+      end
+
     end
   end
 end

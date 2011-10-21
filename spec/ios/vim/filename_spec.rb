@@ -6,4 +6,8 @@ describe IOS::Vim::Filename do
     IOS::Vim::Filename.new('foo/bar.h').extension.should == 'h'
   end
 
+  it "should be able to extract the stem" do
+    IOS::Vim::Filename.new('foo/bar.h').stem.should == 'foo/bar'
+  end
+
 end
