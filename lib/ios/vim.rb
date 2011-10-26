@@ -6,7 +6,7 @@ module IOS
   module Vim
 
     def self.initialize
-      VIM.command 'autocmd FileType objc command -buffer A :ruby IOS::Vim::alternate<CR>'
+      VIM.command 'autocmd FileType objc command! -buffer A :ruby IOS::Vim::alternate<CR>'
     end
 
     def self.alternate
