@@ -3,7 +3,7 @@ module IOS
     class FileClassifier
 
       EXTENSIONS = {
-        :header => ['h', 'hpp', 'hh', 'H', 'hxx'],
+        :header => ['h', 'hh', 'hpp', 'H', 'hxx'],
         :source => ['m', 'mm', 'cpp', 'cc', 'C', 'cxx']
       }
 
@@ -22,6 +22,14 @@ module IOS
 
       def stem
         @filename.stem
+      end
+
+      def extensions_for_type type
+        EXTENSIONS[type]
+      end
+
+      def primary_extension_for type
+        EXTENSIONS[type][0]
       end
 
     end
