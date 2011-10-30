@@ -15,9 +15,9 @@ module IOS
     end
 
     def self.alternate
-      filename = VIM::Buffer.current.name
+      filename = interface.current_buffer_name
       new_file = AlternateFinder.new(FileClassifier.new(filename)).alternate
-      VIM.command "edit #{new_file}"
+      interface.command "edit #{new_file}"
     end
 
   end 
