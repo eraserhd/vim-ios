@@ -15,11 +15,14 @@ describe IOS::Vim do
     end
   end
 
-  describe '::alternate_file_for' do
-    it 'should use AlternateFinder to get the alternate file' do
+  describe '::alternate_file_for foo.h' do
+    before do
       IOS::Vim::AlternateFinder.should_receive(:new).with('foo.h').and_return(stub :alternate => 'foo.m')
-      IOS::Vim.alternate_file_for('foo.h').should == 'foo.m'
     end
+
+    subject { IOS::Vim.alternate_file_for('foo.h') }
+    
+    it { should == 'foo.m' }
   end
 
 end
