@@ -1,7 +1,6 @@
 require 'ios/vim/alternate_finder'
 require 'ios/vim/file_classifier'
 require 'ios/vim/filename'
-require 'ios/vim/interface'
 
 module IOS
   module Vim
@@ -10,14 +9,14 @@ module IOS
       VIM.command 'autocmd FileType objc,objcpp command! -buffer A :ruby IOS::Vim::alternate<CR>'
     end
 
-    def self.interface
-      IOS::Vim::Interface.new
+    def self.alternate
+      filename = VIM::Buffer.current.name  
+      new_file = alternate_finder_for filename
+      VIM.command "edit #{new_file}"
     end
 
-    def self.alternate
-      filename = interface.current_buffer_name
-      new_file = AlternateFinder.new(FileClassifier.new(filename)).alternate
-      interface.command "edit #{new_file}"
+    def self.alternate_finder_for(filename)
+      AlternateFinder.new(FileClassifier.new(filename)).alternate
     end
 
   end 

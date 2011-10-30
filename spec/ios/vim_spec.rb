@@ -1,21 +1,16 @@
 require 'ios/vim'
 
-describe IOS::Vim do
+module VIM
+  class Buffer; end
+end
 
-  describe '::interface' do
-    it 'should return an interface to vim' do
-      IOS::Vim::interface.should be_kind_of(IOS::Vim::Interface)
-    end
-  end
+describe IOS::Vim do
 
   describe '::alternate' do
     it 'should emit an :edit command' do
-      iface = mock
-      iface.stub(:current_buffer_name).and_return('foo.m')
-      iface.should_receive(:command) do |cmd|
-        cmd.should match(/^edit /)
-      end
-      IOS::Vim.stub(:interface).and_return(iface)
+      VIM::Buffer.stub_chain(:current, :name).and_return('foo.m')
+      IOS::Vim.stub(:alternate_finder_for).and_return('foo.h')
+      VIM.should_receive(:command).with('edit foo.h')
       IOS::Vim::alternate
     end
   end
