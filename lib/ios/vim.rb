@@ -10,8 +10,7 @@ module IOS
     end
 
     def self.alternate
-      filename = VIM::Buffer.current.name  
-      new_file = alternate_finder_for filename
+      new_file = alternate_finder_for VIM::Buffer.current.name  
       VIM.command "edit #{new_file}"
     end
 
