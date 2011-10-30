@@ -9,8 +9,8 @@ module IOS
         :header => :source
       }
 
-      def initialize classifier
-        @classifier = classifier
+      def initialize filename
+        @classifier = FileClassifier.new filename
       end
 
       def alternate

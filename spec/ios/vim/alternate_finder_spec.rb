@@ -7,7 +7,7 @@ describe IOS::Vim::AlternateFinder do
   end
   describe 'switching from a source file' do
     subject do
-      IOS::Vim::AlternateFinder.new(IOS::Vim::FileClassifier.new('foo/bar.m'))
+      IOS::Vim::AlternateFinder.new('foo/bar.m')
     end
 
     context "when a .h exists" do
@@ -26,7 +26,7 @@ describe IOS::Vim::AlternateFinder do
 
   describe 'switching from a header file' do
     subject do
-      IOS::Vim::AlternateFinder.new(IOS::Vim::FileClassifier.new('foo/bar.h'))
+      IOS::Vim::AlternateFinder.new('foo/bar.h')
     end
 
     context 'when the primary counterpart exists' do

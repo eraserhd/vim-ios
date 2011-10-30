@@ -15,7 +15,7 @@ module IOS
     end
 
     def self.alternate_file_for(filename)
-      AlternateFinder.new(FileClassifier.new(filename)).alternate
+      AlternateFinder.new(filename).alternate
     end
 
   end 
