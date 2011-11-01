@@ -16,6 +16,10 @@ module IOS
         open_alternate 'split'
       end
 
+      def command_AT
+        open_alternate 'tabedit'
+      end
+
       def alternate_file_for(filename)
         AlternateFinder.new(filename).alternate
       end

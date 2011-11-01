@@ -41,6 +41,13 @@ describe IOS::Vim::Commands do
       end
     end
 
+    describe '::command_AT' do
+      it "emits a :tabedit command for the alternate" do
+        VIM.should_receive(:command).with("tabedit #{expected_alternate}")
+        subject.command_AT
+      end
+    end
+
   end
 
   describe '::alternate_file_for foo.h' do
