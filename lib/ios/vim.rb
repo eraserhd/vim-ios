@@ -7,15 +7,15 @@ module IOS
   module Vim
 
     def self.initialize
-      command_list.each {|command| map_buffer_command command}
+      commands.each {|command| map_buffer_command command}
     end
 
     class <<self
 
-      def command_list
+      def commands
         [:A, :AV]
       end
-      private :command_list
+      private :commands
 
       def map_buffer_command(command)
         VIM.command "autocmd FileType objc,objcpp command! -buffer #{command} :ruby IOS::Vim::command_#{command}<CR>"
