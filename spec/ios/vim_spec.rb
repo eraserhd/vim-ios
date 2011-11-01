@@ -6,6 +6,13 @@ end
 
 describe IOS::Vim do
 
+  describe '::initialize' do
+    it 'should map the :A command' do
+      VIM.should_receive(:command).with('autocmd FileType objc,objcpp command! -buffer A :ruby IOS::Vim::alternate<CR>')
+      IOS::Vim::initialize
+    end
+  end
+
   describe '::alternate for some_file.h' do
     it "emits an ':edit some_file.mm' command" do
       VIM::Buffer.stub_chain(:current, :name).and_return('this_shouldnt_exist.h')
