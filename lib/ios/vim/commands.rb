@@ -17,6 +17,7 @@ module IOS
       def alternate_file_for(filename)
         AlternateFinder.new(filename).alternate
       end
+      private :alternate_file_for
 
     end
 

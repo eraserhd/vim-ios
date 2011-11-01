@@ -30,10 +30,9 @@ describe IOS::Vim::Commands do
   end
 
   describe '::alternate_file_for foo.h' do
-
     it 'should return what AlternateFinder returns' do
       IOS::Vim::AlternateFinder.should_receive(:new).with('foo.h').and_return(stub :alternate => 'foo.m')
-      subject.alternate_file_for('foo.h').should == 'foo.m'
+      subject.send(:alternate_file_for,'foo.h').should == 'foo.m'
     end
   end
 
