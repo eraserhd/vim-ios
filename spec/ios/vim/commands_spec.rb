@@ -11,22 +11,29 @@ describe IOS::Vim::Commands do
     o
   end
 
-  describe '::command_A for some_file.h' do
-    it "emits an ':edit some_file.mm' command" do
-      VIM::Buffer.stub_chain(:current, :name).and_return('this_shouldnt_exist.h')
-      subject.stub(:alternate_file_for).and_return('this_shouldnt_exist.mm')
-      VIM.should_receive(:command).with('edit this_shouldnt_exist.mm')
-      subject.command_A
-    end
-  end
+  context 'when current buffer name is "this_shouldnt_exist.h"' do
 
-  describe '::command_AV for some_file.h' do
-    it "emits an ':vsplit some_file.mm' command" do
+    let(:expected_alternate) {'this_shouldnt_exist.mm'}
+
+    before do
       VIM::Buffer.stub_chain(:current, :name).and_return('this_shouldnt_exist.h')
-      subject.stub(:alternate_file_for).and_return('this_shouldnt_exist.mm')
-      VIM.should_receive(:command).with('vsplit this_shouldnt_exist.mm')
-      subject.command_AV
+      subject.stub(:alternate_file_for).and_return(expected_alternate)
     end
+
+    describe '::command_A' do
+      it "emits an :edit command for the alternate" do
+        VIM.should_receive(:command).with("edit #{expected_alternate}")
+        subject.command_A
+      end
+    end
+
+    describe '::command_AV' do
+      it "emits a :vsplit command for the alternate" do
+        VIM.should_receive(:command).with("vsplit #{expected_alternate}")
+        subject.command_AV
+      end
+    end
+
   end
 
   describe '::alternate_file_for foo.h' do
