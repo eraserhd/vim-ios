@@ -12,6 +12,10 @@ module IOS
         open_alternate 'vsplit'
       end
 
+      def command_AS
+        open_alternate 'split'
+      end
+
       def alternate_file_for(filename)
         AlternateFinder.new(filename).alternate
       end

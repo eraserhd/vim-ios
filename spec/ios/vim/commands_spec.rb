@@ -34,6 +34,13 @@ describe IOS::Vim::Commands do
       end
     end
 
+    describe '::command_AS' do
+      it "emits a :split command for the alternate" do
+        VIM.should_receive(:command).with("split #{expected_alternate}")
+        subject.command_AS
+      end
+    end
+
   end
 
   describe '::alternate_file_for foo.h' do
