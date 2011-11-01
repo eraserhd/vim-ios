@@ -15,6 +15,7 @@ module IOS
       def command_list
         [:A, :AV]
       end
+      private :command_list
 
       def map_buffer_command(command)
         VIM.command "autocmd FileType objc,objcpp command! -buffer #{command} :ruby IOS::Vim::command_#{command}<CR>"
