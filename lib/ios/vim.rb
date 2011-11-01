@@ -13,7 +13,7 @@ module IOS
     class <<self
 
       def commands
-        [:A, :AV]
+        methods.grep(/^command_/).map {|name| name.gsub(/^command_/, "").intern}
       end
       private :commands
 

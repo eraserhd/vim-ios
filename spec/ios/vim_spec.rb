@@ -20,4 +20,15 @@ describe IOS::Vim do
     end
   end
 
+  describe '::commands' do
+    it 'should return a command for class method named command_*' do
+      IOS::Vim.instance_eval do
+        class<<self
+          def command_QwErTyUiOp; end
+        end
+      end
+      IOS::Vim.send(:commands).should include(:QwErTyUiOp)
+    end
+  end
+
 end
