@@ -7,8 +7,9 @@ module IOS
   module Vim
 
     def self.initialize
-      VIM.command 'autocmd FileType objc,objcpp command! -buffer A :ruby IOS::Vim::command_A<CR>'
-      VIM.command 'autocmd FileType objc,objcpp command! -buffer AV :ruby IOS::Vim::command_AV<CR>'
+      [:A, :AV].each do |command|
+        VIM.command "autocmd FileType objc,objcpp command! -buffer #{command} :ruby IOS::Vim::command_#{command}<CR>"
+      end
     end
 
     extend Commands
