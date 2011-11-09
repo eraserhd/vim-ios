@@ -11,12 +11,12 @@ describe IOS::Vim::Commands do
     o
   end
 
-  context 'when current buffer name is "this_shouldnt_exist.h"' do
+  context 'when current buffer name is "ThisShouldExist.h"' do
 
-    let(:expected_alternate) {'this_shouldnt_exist.mm'}
+    let(:expected_alternate) {'ThisShouldExist.mm'}
 
     before do
-      VIM::Buffer.stub_chain(:current, :name).and_return('this_shouldnt_exist.h')
+      VIM::Buffer.stub_chain(:current, :name).and_return('ThisShouldExist.h')
       subject.stub(:alternate_file_for).and_return(expected_alternate)
     end
 
