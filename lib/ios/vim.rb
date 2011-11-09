@@ -8,7 +8,7 @@ module IOS
 
     def self.initialize
       commands.each {|command| map_buffer_command command}
-      edit_commands.each {|command| map_edit_command command}
+      edit_commands.each {|command| install_edit_command command}
     end
 
     class <<self

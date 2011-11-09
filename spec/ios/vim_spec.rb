@@ -17,8 +17,8 @@ describe IOS::Vim do
 
     it 'should install detected edit commands' do
       IOS::Vim.stub(:edit_commands).and_return([:FoObAr, :Baz])
-      IOS::Vim.should_receive(:map_edit_command).with(:FoObAr)
-      IOS::Vim.should_receive(:map_edit_command).with(:Baz)
+      IOS::Vim.should_receive(:install_edit_command).with(:FoObAr)
+      IOS::Vim.should_receive(:install_edit_command).with(:Baz)
       IOS::Vim::initialize
     end
   end
