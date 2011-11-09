@@ -14,6 +14,13 @@ describe IOS::Vim do
       VIM.should_receive(:command).with('autocmd FileType objc,objcpp command! -buffer FoObAr :ruby IOS::Vim::command_FoObAr<CR>')
       IOS::Vim::initialize
     end
+
+    it 'should install detected edit commands' do
+      IOS::Vim.stub(:edit_commands).and_return([:FoObAr, :Baz])
+      IOS::Vim.should_receive(:map_edit_command).with(:FoObAr)
+      IOS::Vim.should_receive(:map_edit_command).with(:Baz)
+      IOS::Vim::initialize
+    end
   end
 
   describe '::commands' do
