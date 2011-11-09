@@ -17,6 +17,11 @@ module IOS
       end
       private :commands
 
+      def edit_commands
+        methods.grep(/^edit_command_/).map {|name| name.to_s.gsub(/^edit_command_/, "").intern}
+      end
+      private :edit_commands
+
       def map_buffer_command(command)
         VIM.command "autocmd FileType objc,objcpp command! -buffer #{command} :ruby IOS::Vim::command_#{command}<CR>"
       end

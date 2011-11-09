@@ -23,4 +23,11 @@ describe IOS::Vim do
     end
   end
 
+  describe '::edit_commands' do
+    it 'should return :QwErTyUiOp if edit_command_QwErTyUiOp is defined' do
+      IOS::Vim.instance_eval {class<<self; def edit_command_QwErTyUiOp; end; end}
+      IOS::Vim.send(:edit_commands).should include(:QwErTyUiOp)
+    end
+  end
+
 end
