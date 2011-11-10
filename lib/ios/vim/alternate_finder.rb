@@ -1,4 +1,3 @@
-require 'ios/vim/a_type_classifier'
 
 module IOS
   module Vim
