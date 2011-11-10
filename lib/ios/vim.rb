@@ -7,26 +7,15 @@ module IOS
   module Vim
 
     def self.initialize
-      commands.each {|command| map_buffer_command command}
       edit_commands.each {|command| install_edit_command command}
     end
 
     class <<self
 
-      def commands
-        methods.grep(/^command_/).map {|name| name.to_s.gsub(/^command_/, "").intern}
-      end
-      private :commands
-
       def edit_commands
         methods.grep(/^edit_command_/).map {|name| name.to_s.gsub(/^edit_command_/, "").intern}
       end
       private :edit_commands
-
-      def map_buffer_command(command)
-        VIM.command "autocmd FileType objc,objcpp command! -buffer #{command} :ruby IOS::Vim::command_#{command}<CR>"
-      end
-      private :map_buffer_command
 
       EDIT_VARIANTS = {
         '' => 'edit',
@@ -45,7 +34,7 @@ module IOS
       private :install_edit_command
 
       def edit_command_variant(command, infix)
-        "#{command[0..0]}#{infix}#{command[1..-1]}"
+        "#{command.to_s[0..0]}#{infix}#{command.to_s[1..-1]}"
       end
       private :edit_command_variant
 

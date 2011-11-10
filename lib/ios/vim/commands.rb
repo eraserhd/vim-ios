@@ -4,20 +4,8 @@ module IOS
 
     module Commands
 
-      def command_A
-        open_alternate 'edit'
-      end
-
-      def command_AV
-        open_alternate 'vsplit'
-      end
-
-      def command_AS
-        open_alternate 'split'
-      end
-
-      def command_AT
-        open_alternate 'tabedit'
+      def edit_command_A(method)
+        open_alternate method
       end
 
       def alternate_file_for(filename)
