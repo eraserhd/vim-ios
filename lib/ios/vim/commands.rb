@@ -8,6 +8,10 @@ module IOS
         open_alternate method
       end
 
+      def edit_command_Rspec(method)
+        VIM.command "#{method} #{VIM::Buffer.current.name}"
+      end
+
       def alternate_file_for(filename)
         AlternateFinder.new(filename).alternate
       end
