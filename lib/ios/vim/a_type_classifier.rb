@@ -1,6 +1,6 @@
 module IOS
   module Vim
-    class FileClassifier
+    class ATypeClassifier
 
       EXTENSIONS = {
         :header => ['h', 'hh', 'hpp', 'H', 'hxx'],

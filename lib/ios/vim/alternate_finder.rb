@@ -1,4 +1,4 @@
-require 'ios/vim/file_classifier'
+require 'ios/vim/a_type_classifier'
 
 module IOS
   module Vim
@@ -10,7 +10,7 @@ module IOS
       }
 
       def initialize filename
-        @classifier = FileClassifier.new filename
+        @classifier = ATypeClassifier.new filename
       end
 
       def alternate
