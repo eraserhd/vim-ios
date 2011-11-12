@@ -5,10 +5,12 @@ module IOS
 
       def initialize(filename)
         @filename = filename
+        @classifier = RTypeClassifier.new @filename
       end
 
       def spec
-        @filename
+        return @filename if @classifier.type == :spec
+        "#{@classifier.stem}Spec.m"
       end
       
     end
