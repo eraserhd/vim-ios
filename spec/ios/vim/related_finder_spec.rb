@@ -8,12 +8,20 @@ describe IOS::Vim::RelatedFinder do
 
   describe '#spec' do
 
-    it 'returns the current file if it is a spec' do
-      IOS::Vim::RelatedFinder.new('foo/BarSpec.m').spec.should == 'foo/BarSpec.m'
+    context 'when given BarSpec.m' do
+
+      it 'returns BarSpec.m' do
+        IOS::Vim::RelatedFinder.new('BarSpec.m').spec.should == 'BarSpec.m'
+      end
+
     end
 
-    it 'returns FooSpec.m if given Foo.m' do
-      IOS::Vim::RelatedFinder.new('Foo.m').spec.should == 'FooSpec.m'
+    context 'when given Foo.m' do
+
+      it 'returns FooSpec.m' do
+        IOS::Vim::RelatedFinder.new('Foo.m').spec.should == 'FooSpec.m'
+      end
+
     end
 
   end
