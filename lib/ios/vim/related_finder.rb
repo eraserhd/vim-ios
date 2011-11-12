@@ -10,6 +10,7 @@ module IOS
 
       def spec
         return @filename if @classifier.type == :spec
+        return "#{@classifier.stem}Spec.mm" if File.exists? "#{@classifier.stem}Spec.mm"
         return sentestingkit_spec if File.exists? sentestingkit_spec
         kiwi_spec
       end

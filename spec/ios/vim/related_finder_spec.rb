@@ -23,7 +23,6 @@ describe IOS::Vim::RelatedFinder do
       end
 
       context 'when FooTest.m exists' do
-
         before do
           File.stub(:exists?).with('FooTest.m').and_return true
         end
@@ -31,7 +30,16 @@ describe IOS::Vim::RelatedFinder do
         it 'should return FooTest.m' do
           IOS::Vim::RelatedFinder.new('Foo.m').spec.should == 'FooTest.m'
         end
+      end
 
+      context 'when FooSpec.mm exists' do
+        before do
+          File.stub(:exists?).with('FooSpec.mm').and_return true
+        end
+
+        it 'should return FooSpec.mm' do
+          IOS::Vim::RelatedFinder.new('Foo.m').spec.should == 'FooSpec.mm'
+        end
       end
 
     end
