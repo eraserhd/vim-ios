@@ -9,7 +9,7 @@ module IOS
       end
 
       def type
-        return :spec if @filename =~ /(?:Spec|Test)\.(?:m|h)$/
+        return :spec if @filename =~ /(?:Spec|Test)\.[^\.]*$/
         :code
       end
 
