@@ -37,10 +37,33 @@ After which, everything should Just Work(tm).
 Navigation
 ----------
 
-Navigation from header to implementation files and back is done through the `:A`
-command and its variants.  `:A` replaces the current file with its alternate,
-while `:AS` opens the alternate in a split, `:AV` opens the alternate in a
-vertical split, and `:AT` opens the alternate in a new tab.
+<table>
+<caption>Navigation Commands</caption>
+<tr>
+  <th>edit</th>
+  <th>split</th>
+  <th>vsplit</th>
+  <th>tabedit</th>
+  <th>Description</th>
+</tr>
+<tr>
+  <td>:A, :AE</td>
+  <td>:AS</td>
+  <td>:AV</td>
+  <td>:AT</td>
+  <td>
+    Open alternate file. This will open the corresponding
+    header or implementation file for the current buffer.
+  </td>
+</tr>
+<tr>
+  <td>:Rspec, :REspec</td>
+  <td>:RSspec</td>
+  <td>:RVspec</td>
+  <td>:RTspec</td>
+  <td>Open test suite or spec for this class.</td>
+</tr>
+</table>
 
 Shameless Self-Promotion
 ------------------------
