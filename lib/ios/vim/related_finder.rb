@@ -10,14 +10,14 @@ module IOS
 
       def spec
         return @filename if @classifier.type == :spec
-        return sentestingkit_spec_name if File.exists? sentestingkit_spec_name
+        return sentestingkit_spec if File.exists? sentestingkit_spec
         "#{@classifier.stem}Spec.m"
       end
 
-      def sentestingkit_spec_name
+      def sentestingkit_spec
         "#{@classifier.stem}Test.m" 
       end
-      private :sentestingkit_spec_name
+      private :sentestingkit_spec
 
     end
 
