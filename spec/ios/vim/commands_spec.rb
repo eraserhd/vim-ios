@@ -51,4 +51,11 @@ describe IOS::Vim::Commands do
     end
   end
 
+  describe '::spec_for' do
+    it 'should use RelatedFinder to find the related spec' do
+      IOS::Vim::RelatedFinder.should_receive(:new).with('FooClass.m').and_return(stub :spec => 'FooClassSpec.m')
+      subject.send(:spec_for, 'FooClass.m').should == 'FooClassSpec.m'
+    end
+  end
+
 end

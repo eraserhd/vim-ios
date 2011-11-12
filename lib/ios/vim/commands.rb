@@ -9,8 +9,14 @@ module IOS
       end
 
       def edit_command_Rspec(method)
-        VIM.command "#{method} #{VIM::Buffer.current.name}"
+        spec = RelatedFinder.new(VIM::Buffer.current.name).spec
+        VIM.command "#{method} #{spec}"
       end
+
+      def spec_for(filename)
+        RelatedFinder.new(filename).spec
+      end
+      private :spec_for
 
       def alternate_file_for(filename)
         AlternateFinder.new(filename).alternate
