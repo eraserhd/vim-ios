@@ -18,4 +18,12 @@ describe IOS::Vim::RTypeClassifier do
 
   end
 
+  describe '#stem' do
+
+    it 'returns "FooClass" for "FooClass" with some weird extension' do
+      IOS::Vim::RTypeClassifier.new('FooClass.sOMe_wEIrDx').stem.should == 'FooClass'
+    end
+    
+  end
+
 end

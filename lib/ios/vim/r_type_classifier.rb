@@ -12,6 +12,10 @@ module IOS
         return :spec if @filename =~ /(?:Spec|Test)\.[^\.]*$/
         :code
       end
+      
+      def stem
+        @filename.gsub(/\.[^\.]*$/, "")
+      end
 
     end
 
