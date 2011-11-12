@@ -11,8 +11,13 @@ module IOS
       def spec
         return @filename if @classifier.type == :spec
         return sentestingkit_spec if File.exists? sentestingkit_spec
+        kiwi_spec
+      end
+
+      def kiwi_spec
         "#{@classifier.stem}Spec.m"
       end
+      private :kiwi_spec
 
       def sentestingkit_spec
         "#{@classifier.stem}Test.m" 
