@@ -38,12 +38,11 @@ Navigation
 ----------
 
 <table>
-<caption>Navigation Commands</caption>
 <tr>
-  <th>edit</th>
-  <th>split</th>
-  <th>vsplit</th>
-  <th>tabedit</th>
+  <th>replace file</th>
+  <th>in new split</th>
+  <th>in new vertical split</th>
+  <th>in new tab</th>
   <th>Description</th>
 </tr>
 <tr>
