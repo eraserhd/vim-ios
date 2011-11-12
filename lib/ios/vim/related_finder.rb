@@ -10,9 +10,10 @@ module IOS
 
       def spec
         return @filename if @classifier.type == :spec
+        return "#{@classifier.stem}Test.m" if File.exists?("#{@classifier.stem}Test.m")
         "#{@classifier.stem}Spec.m"
       end
-      
+
     end
 
   end
