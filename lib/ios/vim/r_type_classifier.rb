@@ -14,8 +14,13 @@ module IOS
       end
       
       def stem
-        @filename.gsub(/\.[^\.]*$/, "").gsub(/(?:Spec|Test)$/, "")
+        filename_without_extension.gsub(/(?:Spec|Test)$/, "")
       end
+
+      def filename_without_extension
+        @filename.gsub(/\.[^\.]*$/, "")
+      end
+      private :filename_without_extension
 
     end
 
