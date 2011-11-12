@@ -2,6 +2,7 @@ require 'ios/vim/a_type_classifier'
 require 'ios/vim/alternate_finder'
 require 'ios/vim/commands'
 require 'ios/vim/filename'
+require 'ios/vim/r_type_classifier'
 
 module IOS
   module Vim
