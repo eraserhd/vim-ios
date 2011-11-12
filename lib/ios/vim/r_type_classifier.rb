@@ -14,7 +14,7 @@ module IOS
       end
       
       def stem
-        @filename.gsub(/\.[^\.]*$/, "").gsub(/Spec$/, "")
+        @filename.gsub(/\.[^\.]*$/, "").gsub(/(?:Spec|Test)$/, "")
       end
 
     end

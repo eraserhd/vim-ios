@@ -27,6 +27,10 @@ describe IOS::Vim::RTypeClassifier do
     it 'returns "FooClass" for "FooClassSpec" with some weird extension' do
       IOS::Vim::RTypeClassifier.new('FooClassSpec.SSOOMMEE_whatever').stem.should == 'FooClass'
     end
+
+    it 'returns "FooClass" for "FooClassTest" with some weird extension' do
+      IOS::Vim::RTypeClassifier.new('FooClassTest.xSxOxMxE_whatever').stem.should == 'FooClass'
+    end
     
   end
 
