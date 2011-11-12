@@ -9,8 +9,7 @@ module IOS
       end
 
       def edit_command_Rspec(method)
-        spec = RelatedFinder.new(VIM::Buffer.current.name).spec
-        VIM.command "#{method} #{spec}"
+        VIM.command "#{method} #{spec_for VIM::Buffer.current.name}"
       end
 
       def spec_for(filename)
