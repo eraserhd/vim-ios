@@ -14,3 +14,10 @@ let s:LibPath = expand('<sfile>:h:h') . '/lib'
 execute "ruby $:.push('" . s:LibPath . "')"
 execute "ruby require 'ios/vim'" 
 ruby IOS::Vim::initialize
+
+if has('autocmd')
+  augroup ios_vim
+    autocmd!
+    autocmd FileType objc,objcpp set foldmethod=expr foldexpr=getline(v:lnum)=~'^#pragma\ mark\ [^-]'?'>1':'='
+  augroup END
+endif
