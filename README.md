@@ -69,6 +69,13 @@ Navigation
   <td>:RTimpl</td>
   <td>Open corresponding implementation file.</td>
 </tr>
+<tr>
+  <td>:R, :RE</td>
+  <td>:RS</td>
+  <td>:RV</td>
+  <td>:RT</td>
+  <td>Open corresponding file of next type.</td>
+</tr>
 </table>
 
 Shameless Self-Promotion
