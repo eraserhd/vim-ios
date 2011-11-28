@@ -1,3 +1,4 @@
+
 module IOS
   module Vim
 
@@ -8,7 +9,7 @@ module IOS
         @classifier = RTypeClassifier.new @filename
       end
 
-      module CommonTypeFinderMethods
+      module CommonMethods
         def initialize(filename, classifier)
           @filename = filename
           @classifier = classifier
@@ -29,7 +30,7 @@ module IOS
       end
 
       class Spec
-        include CommonTypeFinderMethods
+        include CommonMethods
 
         def candidates
           [
@@ -47,7 +48,7 @@ module IOS
       end
 
       class Impl
-        include CommonTypeFinderMethods
+        include CommonMethods
 
         def candidates
           [
