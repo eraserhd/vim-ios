@@ -5,12 +5,14 @@ module IOS
   module Vim
 
     class RelatedFinder
+      RELATED_TYPES = [ Spec, Impl ]
+
       def initialize(filename)
         @filename = filename
         @classifier = RTypeClassifier.new @filename
       end
 
-      [ Spec, Impl ].each do |type|
+      RELATED_TYPES.each do |type|
         define_method(type.name.gsub(/^.*::/, "").downcase) do
           type.new(@filename, @classifier).find
         end
