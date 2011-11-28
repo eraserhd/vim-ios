@@ -1,3 +1,5 @@
+require 'ios/vim/related_finder/common_methods'
+
 module IOS
   module Vim
     class RelatedFinder
