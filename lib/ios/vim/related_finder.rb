@@ -12,6 +12,10 @@ module IOS
         return @filename if @classifier.type == :spec
         existing_spec_candidates.detect{|e| File.exists? e} || kiwi_spec
       end
+      
+      def impl
+        return @filename
+      end
 
       def existing_spec_candidates
         [

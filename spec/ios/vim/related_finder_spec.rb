@@ -27,7 +27,7 @@ describe IOS::Vim::RelatedFinder do
 
         it 'should return FooTest.m' do
           IOS::Vim::RelatedFinder.new('Foo.m').spec.should == 'FooTest.m'
-        end
+       end
       end
 
       context 'when FooSpec.mm exists' do
@@ -40,6 +40,16 @@ describe IOS::Vim::RelatedFinder do
         end
       end
 
+    end
+
+  end
+
+  context 'when finding a corresponding impl' do
+
+    context 'when given Bar.m' do
+      it 'returns Bar.m' do
+        IOS::Vim::RelatedFinder.new('Bar.m').impl.should == 'Bar.m'
+      end
     end
 
   end
