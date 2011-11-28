@@ -15,7 +15,7 @@ module IOS
         end
 
         def my_type
-          self.class.name.downcase.to_sym
+          self.class.name.gsub(/^.*::/, "").downcase.to_sym
         end
 
         def file_is_my_type?
@@ -64,12 +64,10 @@ module IOS
         private :default
       end
 
-      def spec
-        Spec.new(@filename, @classifier).find
-      end
-
-      def impl
-        Impl.new(@filename, @classifier).find
+      [ Spec, Impl ].each do |type|
+        define_method(type.name.gsub(/^.*::/, "").downcase) do
+          type.new(@filename, @classifier).find
+        end
       end
 
     end
