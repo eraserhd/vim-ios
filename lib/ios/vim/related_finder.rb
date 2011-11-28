@@ -16,22 +16,22 @@ module IOS
 
         def find
           return @filename if @classifier.type == :spec
-          candidates.detect{|e| File.exists? e} || default_spec
+          candidates.detect{|e| File.exists? e} || default
         end
 
         def candidates
           [
             "#{@classifier.stem}Spec.mm",
-            default_spec,
+            default,
             "#{@classifier.stem}Test.m" 
           ]
         end
         private :candidates
 
-        def default_spec
+        def default
           "#{@classifier.stem}Spec.m"
         end
-        private :default_spec
+        private :default
       end
 
       def spec
