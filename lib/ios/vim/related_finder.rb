@@ -14,7 +14,8 @@ module IOS
       end
       
       def impl
-        return @filename
+        return @filename if @classifier.type == :impl
+        "#{@classifier.stem}.m"
       end
 
       def existing_spec_candidates

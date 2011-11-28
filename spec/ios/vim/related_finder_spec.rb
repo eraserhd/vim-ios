@@ -52,6 +52,12 @@ describe IOS::Vim::RelatedFinder do
       end
     end
 
+    context 'when given BarSpec.m' do
+      it 'returns Bar.m' do
+        IOS::Vim::RelatedFinder.new('BarSpec.m').impl.should == 'Bar.m'
+      end
+    end
+
   end
 
 end
