@@ -21,15 +21,16 @@ module IOS
         def file_is_my_type?
           @classifier.type == my_type
         end
-      end
-
-      class Spec
-        include CommonTypeFinderMethods
 
         def find
           return @filename if file_is_my_type?
           candidates.detect{|e| File.exists? e} || default
         end
+
+      end
+
+      class Spec
+        include CommonTypeFinderMethods
 
         def candidates
           [
@@ -52,11 +53,6 @@ module IOS
 
       class Impl
         include CommonTypeFinderMethods
-
-        def find
-          return @filename if file_is_my_type?
-          candidates.detect{|e| File.exists? e} || default
-        end
 
         def candidates
           [
