@@ -6,6 +6,7 @@ module IOS
 
     class RelatedFinder
       RELATED_TYPES = [ Spec, Impl ]
+      RELATED_TYPE_SYMBOLS = RELATED_TYPES.map{|e| e.name.gsub(/^.*::/, "").downcase.to_sym}
 
       def initialize(filename)
         @filename = filename
@@ -23,13 +24,12 @@ module IOS
       end
 
       def next_type
-        case @classifier.type
-        when :spec
-          Impl
-        when :impl
-          Spec
-        end
+        i = RELATED_TYPE_SYMBOLS.index(@classifier.type)
+        i = (i + 1) % RELATED_TYPE_SYMBOLS.size
+        RELATED_TYPES[i]
       end
+      private :next_type
+
     end
 
   end
