@@ -22,11 +22,11 @@ describe IOS::Vim::Commands do
 
   def finder(kind, stub_params)
     kind.should_receive(:new).with(@filename).and_return(stub stub_params)
-    @file_to_edit = stub_params.values.first
+    @found_file = stub_params.values.first
   end
 
   def should_edit_found_file
-    VIM.should_receive(:command).with("foozle #{@file_to_edit}")
+    VIM.should_receive(:command).with("foozle #{@found_file}")
     subject.send("edit_command_#{@command}", 'foozle')
   end
 
