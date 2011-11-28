@@ -10,17 +10,17 @@ module IOS
 
       def spec
         return @filename if @classifier.type == :spec
-        existing_spec_candidates.detect{|e| File.exists? e} || kiwi_spec
+        spec_candidates.detect{|e| File.exists? e} || kiwi_spec
       end
 
-      def existing_spec_candidates
+      def spec_candidates
         [
           "#{@classifier.stem}Spec.mm",
           kiwi_spec,
           "#{@classifier.stem}Test.m" 
         ]
       end
-      private :existing_spec_candidates
+      private :spec_candidates
 
       def kiwi_spec
         "#{@classifier.stem}Spec.m"
