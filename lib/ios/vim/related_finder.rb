@@ -26,7 +26,6 @@ module IOS
           return @filename if file_is_my_type?
           candidates.detect{|e| File.exists? e} || default
         end
-
       end
 
       class Spec
@@ -47,10 +46,6 @@ module IOS
         private :default
       end
 
-      def spec
-        Spec.new(@filename, @classifier).find
-      end
-
       class Impl
         include CommonTypeFinderMethods
 
@@ -67,6 +62,10 @@ module IOS
           "#{@classifier.stem}.m"
         end
         private :default
+      end
+
+      def spec
+        Spec.new(@filename, @classifier).find
       end
 
       def impl
