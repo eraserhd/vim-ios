@@ -60,7 +60,14 @@ Navigation
   <td>:RSspec</td>
   <td>:RVspec</td>
   <td>:RTspec</td>
-  <td>Open test suite or spec for this class.</td>
+  <td>Open corresponding test suite or spec.</td>
+</tr>
+<tr>
+  <td>:Rimpl, :REimpl</td>
+  <td>:RSimpl</td>
+  <td>:RVimpl</td>
+  <td>:RTimpl</td>
+  <td>Open corresponding implementation file.</td>
 </tr>
 </table>
 
