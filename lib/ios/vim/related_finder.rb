@@ -46,22 +46,22 @@ module IOS
 
         def find
           return @filename if @classifier.type == :impl
-          candidates.detect{|e| File.exists? e} || default_impl
+          candidates.detect{|e| File.exists? e} || default
         end
 
         def candidates
           [
             "#{@classifier.stem}.mm",
-            default_impl,
+            default,
             "#{@classifier.stem}.h"
           ]
         end
         private :candidates
 
-        def default_impl
+        def default
           "#{@classifier.stem}.m"
         end
-        private :default_impl
+        private :default
       end
 
       def impl
