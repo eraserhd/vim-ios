@@ -1,4 +1,4 @@
-require 'ios/vim/related_finder/common_methods'
+require 'ios/vim/related_finder/spec'
 
 module IOS
   module Vim
@@ -8,24 +8,6 @@ module IOS
       def initialize(filename)
         @filename = filename
         @classifier = RTypeClassifier.new @filename
-      end
-
-      class Spec
-        include CommonMethods
-
-        def candidates
-          [
-            "#{@classifier.stem}Spec.mm",
-            default,
-            "#{@classifier.stem}Test.m" 
-          ]
-        end
-        private :candidates
-
-        def default
-          "#{@classifier.stem}Spec.m"
-        end
-        private :default
       end
 
       class Impl
