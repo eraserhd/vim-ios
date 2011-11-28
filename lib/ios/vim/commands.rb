@@ -5,16 +5,21 @@ module IOS
     module Commands
 
       def edit_command_A(method)
-        VIM.command "#{method} #{AlternateFinder.new(VIM::Buffer.current.name).alternate}"
+        find_and_edit method, AlternateFinder, :alternate
       end
 
       def edit_command_Rspec(method)
-        VIM.command "#{method} #{RelatedFinder.new(VIM::Buffer.current.name).spec}"
+        find_and_edit method, RelatedFinder, :spec
       end
       
       def edit_command_Rimpl(method)
-        VIM.command "#{method} #{RelatedFinder.new(VIM::Buffer.current.name).impl}"
+        find_and_edit method, RelatedFinder, :impl
       end
+
+      def find_and_edit(method, finder, what)
+        VIM.command "#{method} #{finder.new(VIM::Buffer.current.name).send what}"
+      end
+      private :find_and_edit
 
     end
 
