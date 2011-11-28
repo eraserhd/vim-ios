@@ -72,9 +72,15 @@ describe IOS::Vim::RelatedFinder do
 
   context 'when finding the next related file' do
 
-    context 'when given a Bar.m' do
+    context 'when given Bar.m' do
       it 'returns BarSpec.m' do
         IOS::Vim::RelatedFinder.new('Bar.m').next.should == 'BarSpec.m'
+      end
+    end
+
+    context 'when given BarSpec.m' do
+      it 'returns Bar.m' do
+        IOS::Vim::RelatedFinder.new('BarSpec.m').next.should == 'Bar.m'
       end
     end
 

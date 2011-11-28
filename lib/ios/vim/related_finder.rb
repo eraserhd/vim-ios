@@ -19,7 +19,16 @@ module IOS
       end
 
       def next
-        Spec.new(@filename, @classifier).find
+        next_type.new(@filename, @classifier).find
+      end
+
+      def next_type
+        case @classifier.type
+        when :spec
+          Impl
+        when :impl
+          Spec
+        end
       end
     end
 
