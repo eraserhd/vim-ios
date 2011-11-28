@@ -11,6 +11,10 @@ module IOS
       def edit_command_Rspec(method)
         VIM.command "#{method} #{spec_for VIM::Buffer.current.name}"
       end
+      
+      def edit_command_Rimpl(method)
+        VIM.command "#{method} #{VIM::Buffer.current.name}"
+      end
 
       def spec_for(filename)
         RelatedFinder.new(filename).spec

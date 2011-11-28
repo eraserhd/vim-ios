@@ -13,17 +13,25 @@ describe IOS::Vim::Commands do
 
   context 'when current buffer name is "ThisShouldNotExist.h"' do
 
+    let(:original_file) {'ThisShouldNotExist.h'}
     let(:expected_alternate) {'ThisShouldNotExist.mm'}
 
     before do
-      VIM::Buffer.stub_chain(:current, :name).and_return('ThisShouldNotExist.h')
-      subject.stub(:alternate_file_for).and_return(expected_alternate)
+      VIM::Buffer.stub_chain(:current, :name).and_return original_file
+      subject.stub(:alternate_file_for).and_return expected_alternate
     end
 
     describe '::edit_command_A' do
       it "emits the edit command for the alternate" do
         VIM.should_receive(:command).with("foozle #{expected_alternate}")
         subject.edit_command_A 'foozle'
+      end
+    end
+
+    describe '::edit_command_Rimpl' do
+      it "emits the edit command for the same file" do
+        VIM.should_receive(:command).with("barzle #{original_file}")
+        subject.edit_command_Rimpl 'barzle'
       end
     end
 
