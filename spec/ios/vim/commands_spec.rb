@@ -50,4 +50,10 @@ describe IOS::Vim::Commands do
     end
   end
 
+  describe ':R' do
+    it "edits the next related file (according to related finder)" do
+      command(:R).when_editing('Foo.m').with_finder(IOS::Vim::RelatedFinder, :next => 'FooSpec.m').should_edit_found_file
+    end
+  end
+
 end
