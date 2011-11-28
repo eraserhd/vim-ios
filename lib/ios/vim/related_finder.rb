@@ -8,7 +8,7 @@ module IOS
         @classifier = RTypeClassifier.new @filename
       end
 
-      class SpecFinder
+      class Spec
         def initialize(filename, classifier)
           @filename = filename
           @classifier = classifier
@@ -35,7 +35,7 @@ module IOS
       end
 
       def spec
-        SpecFinder.new(@filename, @classifier).find
+        Spec.new(@filename, @classifier).find
       end
 
       class ImplFinder
