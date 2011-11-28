@@ -58,6 +58,16 @@ describe IOS::Vim::RelatedFinder do
       end
     end
 
+    context 'when Bar.mm exists' do
+      before do
+        File.stub(:exists?).with('Bar.mm').and_return true
+      end
+
+      it 'returns Bar.mm' do
+        IOS::Vim::RelatedFinder.new('BarSpec.m').impl.should == 'Bar.mm'
+      end
+    end
+
   end
 
 end

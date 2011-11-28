@@ -15,6 +15,7 @@ module IOS
       
       def impl
         return @filename if @classifier.type == :impl
+        return "#{@classifier.stem}.mm" if File.exists? "#{@classifier.stem}.mm"
         "#{@classifier.stem}.m"
       end
 
