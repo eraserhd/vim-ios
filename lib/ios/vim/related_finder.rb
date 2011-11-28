@@ -8,11 +8,15 @@ module IOS
         @classifier = RTypeClassifier.new @filename
       end
 
-      class Spec
+      module CommonTypeFinderMethods
         def initialize(filename, classifier)
           @filename = filename
           @classifier = classifier
         end
+      end
+
+      class Spec
+        include CommonTypeFinderMethods
 
         def find
           return @filename if @classifier.type == :spec
@@ -39,10 +43,7 @@ module IOS
       end
 
       class Impl
-        def initialize(filename, classifier)
-          @filename = filename
-          @classifier = classifier
-        end
+        include CommonTypeFinderMethods
 
         def find
           return @filename if @classifier.type == :impl
