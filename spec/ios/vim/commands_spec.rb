@@ -1,5 +1,4 @@
-require 'ios/vim/commands'
-require 'ios/vim/alternate_finder'
+require 'ios/vim'
 
 module VIM; class Buffer; end; end
 
@@ -21,7 +20,7 @@ describe IOS::Vim::Commands do
     VIM::Buffer.stub_chain(:current, :name).and_return @filename
   end
 
-  def finder(kind, stub_params)
+  def with_finder(kind, stub_params)
     kind.should_receive(:new).with(@filename).and_return(stub stub_params)
     @found_file = stub_params.values.first
   end
@@ -34,23 +33,23 @@ describe IOS::Vim::Commands do
   describe ':A' do
     it "emits the edit command for the alternate" do
       command(:A).when_editing('FooFile.m')
-      finder IOS::Vim::AlternateFinder, :alternate => 'FooFile.h'
+      with_finder IOS::Vim::AlternateFinder, :alternate => 'FooFile.h'
       should_edit_found_file
     end
   end
 
   describe ':Rimpl' do
-    it "emits the edit command for the impl found by the related file finder" do
+    it "emits the edit command for the impl found by the related file with_finder" do
       command(:Rimpl).when_editing('FooSpec.m')
-      finder IOS::Vim::RelatedFinder, :impl => 'Foo.m'
+      with_finder IOS::Vim::RelatedFinder, :impl => 'Foo.m'
       should_edit_found_file
     end
   end
 
   describe ':Rspec' do
-    it "edits the spec found by the related file finder" do
+    it "edits the spec found by the related file with_finder" do
       command(:Rspec).when_editing('FooClass.m')
-      finder IOS::Vim::RelatedFinder, :spec => 'FooClassSpec.m'
+      with_finder IOS::Vim::RelatedFinder, :spec => 'FooClassSpec.m'
       should_edit_found_file
     end
   end
