@@ -13,6 +13,7 @@ describe IOS::Vim::Commands do
 
   def command(command)
     @command = command
+    self
   end
 
   def when_editing(filename)
@@ -32,8 +33,7 @@ describe IOS::Vim::Commands do
 
   describe ':A' do
     it "emits the edit command for the alternate" do
-      command :A
-      when_editing 'FooFile.m'
+      command(:A).when_editing('FooFile.m')
       finder IOS::Vim::AlternateFinder, :alternate => 'FooFile.h'
       should_edit_found_file
     end
@@ -41,8 +41,7 @@ describe IOS::Vim::Commands do
 
   describe ':Rimpl' do
     it "emits the edit command for the impl found by the related file finder" do
-      command :Rimpl
-      when_editing 'FooSpec.m'
+      command(:Rimpl).when_editing('FooSpec.m')
       finder IOS::Vim::RelatedFinder, :impl => 'Foo.m'
       should_edit_found_file
     end
@@ -50,8 +49,7 @@ describe IOS::Vim::Commands do
 
   describe ':Rspec' do
     it "edits the spec found by the related file finder" do
-      command :Rspec
-      when_editing 'FooClass.m'
+      command(:Rspec).when_editing('FooClass.m')
       finder IOS::Vim::RelatedFinder, :spec => 'FooClassSpec.m'
       should_edit_found_file
     end
