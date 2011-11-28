@@ -17,6 +17,10 @@ module IOS
           type.new(@filename, @classifier).find
         end
       end
+
+      def next
+        Spec.new(@filename, @classifier).find
+      end
     end
 
   end
