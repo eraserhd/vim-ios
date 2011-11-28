@@ -12,12 +12,6 @@ module IOS
         return @filename if @classifier.type == :spec
         existing_spec_candidates.detect{|e| File.exists? e} || kiwi_spec
       end
-      
-      def impl
-        return @filename if @classifier.type == :impl
-        return "#{@classifier.stem}.mm" if File.exists? "#{@classifier.stem}.mm"
-        "#{@classifier.stem}.m"
-      end
 
       def existing_spec_candidates
         [
@@ -32,6 +26,20 @@ module IOS
         "#{@classifier.stem}Spec.m"
       end
       private :kiwi_spec
+
+      def impl
+        return @filename if @classifier.type == :impl
+        impl_candidates.detect{|e| File.exists? e} || "#{@classifier.stem}.m"
+      end
+
+      def impl_candidates
+        [
+          "#{@classifier.stem}.mm",
+          "#{@classifier.stem}.m",
+          "#{@classifier.stem}.h"
+        ]
+      end
+      private :impl_candidates
 
     end
 
