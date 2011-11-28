@@ -10,7 +10,7 @@ module IOS
 
       def type
         return :spec if @filename =~ /(?:Spec|Test)\.[^\.]*$/
-        :code
+        :impl
       end
       
       def stem

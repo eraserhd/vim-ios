@@ -12,8 +12,8 @@ describe IOS::Vim::RTypeClassifier do
       IOS::Vim::RTypeClassifier.new('FooClassTest.llNOTq').type.should == :spec
     end
 
-    it "classifies other files as :code" do
-      IOS::Vim::RTypeClassifier.new('FooClass.m').type.should == :code
+    it "classifies other files as :impl" do
+      IOS::Vim::RTypeClassifier.new('FooClass.m').type.should == :impl
     end
 
   end
