@@ -11,6 +11,10 @@ describe IOS::Vim::Commands do
     o
   end
 
+  def command(command)
+    @command = command
+  end
+
   def when_editing(filename)
     @filename = filename
     VIM::Buffer.stub_chain(:current, :name).and_return @filename
@@ -23,32 +27,33 @@ describe IOS::Vim::Commands do
 
   def should_edit_found_file
     VIM.should_receive(:command).with("foozle #{@file_to_edit}")
+    subject.send("edit_command_#{@command}", 'foozle')
   end
 
   describe ':A' do
     it "emits the edit command for the alternate" do
+      command :A
       when_editing 'FooFile.m'
       finder IOS::Vim::AlternateFinder, :alternate => 'FooFile.h'
       should_edit_found_file
-      subject.edit_command_A 'foozle'
     end
   end
 
   describe ':Rimpl' do
     it "emits the edit command for the impl found by the related file finder" do
+      command :Rimpl
       when_editing 'FooSpec.m'
       finder IOS::Vim::RelatedFinder, :impl => 'Foo.m'
       should_edit_found_file
-      subject.edit_command_Rimpl 'foozle'
     end
   end
 
   describe ':Rspec' do
     it "edits the spec found by the related file finder" do
+      command :Rspec
       when_editing 'FooClass.m'
       finder IOS::Vim::RelatedFinder, :spec => 'FooClassSpec.m'
       should_edit_found_file
-      subject.edit_command_Rspec 'foozle'
     end
   end
 
