@@ -37,32 +37,19 @@ describe IOS::Vim::Commands do
 
   end
 
-  context 'when current buffer name is "SomeSpec.mm"' do
-
-    before do
-      VIM::Buffer.stub_chain(:current, :name).and_return('SomeSpec.mm')
+  describe '::edit_command_Rspec' do
+    it "edits the spec found by the related file finder" do
+      VIM::Buffer.stub_chain(:current, :name).and_return('FooClass.m')
+      VIM.should_receive(:command).with("foozle FooClassSpec.m")
+      IOS::Vim::RelatedFinder.should_receive(:new).with('FooClass.m').and_return(stub :spec => 'FooClassSpec.m')
+      subject.edit_command_Rspec 'foozle'
     end
-
-    describe '::edit_command_Rspec' do
-      it "emits the edit command for the same file" do
-        VIM.should_receive(:command).with("foozle SomeSpec.mm")
-        subject.edit_command_Rspec 'foozle'
-      end
-    end
-
   end
 
   describe '::alternate_file_for foo.h' do
     it 'should return what AlternateFinder returns' do
       IOS::Vim::AlternateFinder.should_receive(:new).with('foo.h').and_return(stub :alternate => 'foo.m')
       subject.send(:alternate_file_for,'foo.h').should == 'foo.m'
-    end
-  end
-
-  describe '::spec_for' do
-    it 'should use RelatedFinder to find the related spec' do
-      IOS::Vim::RelatedFinder.should_receive(:new).with('FooClass.m').and_return(stub :spec => 'FooClassSpec.m')
-      subject.send(:spec_for, 'FooClass.m').should == 'FooClassSpec.m'
     end
   end
 
