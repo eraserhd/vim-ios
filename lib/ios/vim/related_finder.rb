@@ -38,7 +38,7 @@ module IOS
         Spec.new(@filename, @classifier).find
       end
 
-      class ImplFinder
+      class Impl
         def initialize(filename, classifier)
           @filename = filename
           @classifier = classifier
@@ -65,7 +65,7 @@ module IOS
       end
 
       def impl
-        ImplFinder.new(@filename, @classifier).find
+        Impl.new(@filename, @classifier).find
       end
 
     end
