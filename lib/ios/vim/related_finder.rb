@@ -17,13 +17,17 @@ module IOS
         def my_type
           self.class.name.downcase.to_sym
         end
+
+        def file_is_my_type?
+          @classifier.type == my_type
+        end
       end
 
       class Spec
         include CommonTypeFinderMethods
 
         def find
-          return @filename if @classifier.type == my_type
+          return @filename if file_is_my_type?
           candidates.detect{|e| File.exists? e} || default
         end
 
@@ -50,7 +54,7 @@ module IOS
         include CommonTypeFinderMethods
 
         def find
-          return @filename if @classifier.type == my_type
+          return @filename if file_is_my_type?
           candidates.detect{|e| File.exists? e} || default
         end
 
