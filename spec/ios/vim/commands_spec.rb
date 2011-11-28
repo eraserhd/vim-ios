@@ -11,30 +11,22 @@ describe IOS::Vim::Commands do
     o
   end
 
-  context 'when current buffer name is "ThisShouldNotExist.h"' do
-
-    let(:original_file) {'ThisShouldNotExist.h'}
-    let(:expected_alternate) {'ThisShouldNotExist.mm'}
-
-    before do
-      VIM::Buffer.stub_chain(:current, :name).and_return original_file
+  describe ':A' do
+    it "emits the edit command for the alternate" do
+      VIM::Buffer.stub_chain(:current, :name).and_return 'FooFile.m'
+      IOS::Vim::AlternateFinder.should_receive(:new).with('FooFile.m').and_return(stub :alternate => 'FooFile.h')
+      VIM.should_receive(:command).with("foozle FooFile.h")
+      subject.edit_command_A 'foozle'
     end
+  end
 
-    describe ':A' do
-      it "emits the edit command for the alternate" do
-        VIM.should_receive(:command).with("foozle #{expected_alternate}")
-        IOS::Vim::AlternateFinder.should_receive(:new).with(original_file).and_return(stub :alternate => expected_alternate)
-        subject.edit_command_A 'foozle'
-      end
+  describe ':Rimpl' do
+    it "emits the edit command for the impl found by the related file finder" do
+      VIM::Buffer.stub_chain(:current, :name).and_return 'FooSpec.m'
+      IOS::Vim::RelatedFinder.should_receive(:new).with('FooSpec.m').and_return(stub :impl => 'Foo.m')
+      VIM.should_receive(:command).with("barzle Foo.m")
+      subject.edit_command_Rimpl 'barzle'
     end
-
-    describe ':Rimpl' do
-      it "emits the edit command for the same file" do
-        VIM.should_receive(:command).with("barzle #{original_file}")
-        subject.edit_command_Rimpl 'barzle'
-      end
-    end
-
   end
 
   describe ':Rspec' do

@@ -13,7 +13,7 @@ module IOS
       end
       
       def edit_command_Rimpl(method)
-        VIM.command "#{method} #{VIM::Buffer.current.name}"
+        VIM.command "#{method} #{RelatedFinder.new(VIM::Buffer.current.name).impl}"
       end
 
       def spec_for(filename)
