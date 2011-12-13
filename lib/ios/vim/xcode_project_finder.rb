@@ -1,7 +1,7 @@
 module IOS
   module Vim
 
-    class XcodeprojFinder
+    class XcodeProjectFinder
 
       def initialize filesystem
         @filesystem = filesystem
