@@ -21,10 +21,10 @@ module IOS
       end
       private :start_at_current_directory
 
-      def move_up_one_directory
-        @directory = File.dirname(@directory)
+      def at_topmost_directory?
+        File.dirname(@directory) == @directory
       end
-      private :move_up_one_directory
+      private :at_topmost_directory?
 
       def project_in_this_directory?
         !projects_in_this_directory.empty?
@@ -36,6 +36,11 @@ module IOS
       end
       private :project_in_this_directory
 
+      def move_up_one_directory
+        @directory = File.dirname(@directory)
+      end
+      private :move_up_one_directory
+
       def entries_in_this_directory
         @directory_lister.list @directory
       end
@@ -45,11 +50,6 @@ module IOS
         entries_in_this_directory.select{|path| path =~ /\.xcodeproj$/i}
       end
       private :projects_in_this_directory
-
-      def at_topmost_directory?
-        File.dirname(@directory) == @directory
-      end
-      private :at_topmost_directory?
 
     end
 
