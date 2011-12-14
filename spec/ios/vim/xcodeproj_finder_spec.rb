@@ -8,17 +8,16 @@ end
 
 describe IOS::Vim::XcodeProjectFinder do
 
-  context "when it can't find a project folder" do
+  def empty_lister
+    double :current_directory => '/Foo/bar', :list => []
+  end
 
-    let!(:directory_lister) do
-      double :current_directory => '/Foo/bar', :list => []
-    end
-    subject {IOS::Vim::XcodeProjectFinder.new directory_lister}
+  context "when it can't find a project folder" do
+    subject {IOS::Vim::XcodeProjectFinder.new empty_lister}
 
     it "returns nil" do
       subject.find.should be_nil
     end
-
   end
 
   context "when there's a .xcodeproj in the current directory" do
