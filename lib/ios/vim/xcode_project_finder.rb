@@ -9,14 +9,12 @@ module IOS
 
       def find
         start_at_current_directory
-
         until at_topmost_directory?
-          project = project_in_current_directory
+          project = project_in_this_directory
           return project if project
 
-          @directory = File.dirname(@directory)
+          move_to_parent_directory
         end
-
         nil
       end
 
@@ -25,24 +23,29 @@ module IOS
       end
       private :start_at_current_directory
 
-      def project_in_current_directory
-        projects = projects_in_current_directory
+      def move_to_parent_directory
+        @directory = File.dirname(@directory)
+      end
+      private :move_to_parent_directory
+
+      def project_in_this_directory
+        projects = projects_in_this_directory
         unless projects.empty?
           return XcodeProject.new File.join(@directory,projects.first)
         end
         nil
       end
-      private :project_in_current_directory
+      private :project_in_this_directory
 
-      def entries_in_current_directory
+      def entries_in_this_directory
         @directory_lister.list @directory
       end
-      private :entries_in_current_directory
+      private :entries_in_this_directory
 
-      def projects_in_current_directory
-        entries_in_current_directory.select{|path| path =~ /\.xcodeproj$/i}
+      def projects_in_this_directory
+        entries_in_this_directory.select{|path| path =~ /\.xcodeproj$/i}
       end
-      private :projects_in_current_directory
+      private :projects_in_this_directory
 
       def at_topmost_directory?
         File.dirname(@directory) == @directory
