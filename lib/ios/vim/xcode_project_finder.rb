@@ -10,9 +10,7 @@ module IOS
       def find
         start_at_current_directory
         until at_topmost_directory?
-          project = project_in_this_directory
-          return project if project
-
+          return project_in_this_directory if project_in_this_directory?
           move_up_one_directory
         end
         nil
@@ -27,6 +25,11 @@ module IOS
         @directory = File.dirname(@directory)
       end
       private :move_up_one_directory
+
+      def project_in_this_directory?
+        !projects_in_this_directory.empty?
+      end
+      private :project_in_this_directory?
 
       def project_in_this_directory
         projects = projects_in_this_directory
