@@ -22,8 +22,13 @@ module IOS
         nil
       end
 
+      def entries_in_current_directory
+        @directory_lister.list @directory
+      end
+      private :entries_in_current_directory
+
       def projects_in_current_directory
-        @directory_lister.list(@directory).select{|path| path =~ /\.xcodeproj$/i}
+        entries_in_current_directory.select{|path| path =~ /\.xcodeproj$/i}
       end
       private :projects_in_current_directory
 
