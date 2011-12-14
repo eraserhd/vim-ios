@@ -13,7 +13,7 @@ module IOS
           project = project_in_this_directory
           return project if project
 
-          move_to_parent_directory
+          move_up_one_directory
         end
         nil
       end
@@ -23,10 +23,10 @@ module IOS
       end
       private :start_at_current_directory
 
-      def move_to_parent_directory
+      def move_up_one_directory
         @directory = File.dirname(@directory)
       end
-      private :move_to_parent_directory
+      private :move_up_one_directory
 
       def project_in_this_directory
         projects = projects_in_this_directory
