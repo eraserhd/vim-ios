@@ -8,15 +8,15 @@ module IOS
       end
 
       def find
-        directory = @directory_lister.current_directory
+        @directory = @directory_lister.current_directory
         while true
-          files = @directory_lister.list(directory).select{|path| path =~ /\.xcodeproj$/i}
+          files = @directory_lister.list(@directory).select{|path| path =~ /\.xcodeproj$/i}
           unless files.empty?
-            return XcodeProject.new File.join(directory,files.first)
+            return XcodeProject.new File.join(@directory,files.first)
           end
 
-          break if File.dirname(directory) == directory
-          directory = File.dirname(directory)
+          break if File.dirname(@directory) == @directory
+          @directory = File.dirname(@directory)
         end
 
         nil
