@@ -8,12 +8,16 @@ end
 
 describe IOS::Vim::XcodeProjectFinder do
 
-  def lister_with
-    double :current_directory => '/Foo/bar/baz', :list => []
+  def lister_with dirs
+    lister = double :current_directory => '/Foo/bar/baz', :list => []
+    dirs.each do |dir, contents|
+      lister.stub(:list).with(dir).and_return(contents)
+    end
+    lister
   end
 
   context "when it can't find a project folder" do
-    subject {IOS::Vim::XcodeProjectFinder.new lister_with}
+    subject {IOS::Vim::XcodeProjectFinder.new lister_with({})}
 
     it "returns nil" do
       subject.find.should be_nil
@@ -23,9 +27,7 @@ describe IOS::Vim::XcodeProjectFinder do
   context "when there's a .xcodeproj in the current directory" do
 
     let!(:directory_lister) do
-      lister = lister_with
-      lister.stub(:list).with('/Foo/bar/baz').and_return(['Foo.xcodeproj'])
-      lister
+      lister_with('/Foo/bar/baz' => ['Foo.xcodeproj'])
     end
     subject {IOS::Vim::XcodeProjectFinder.new directory_lister}
 
@@ -38,9 +40,7 @@ describe IOS::Vim::XcodeProjectFinder do
   context "when there's a .xcodeproj in a parent directory" do
     
     let!(:directory_lister) do
-      lister = lister_with
-      lister.stub(:list).with('/Foo/bar').and_return(['Foo.xcodeproj'])
-      lister
+      lister_with('/Foo/bar' => ['Foo.xcodeproj'])
     end
     subject {IOS::Vim::XcodeProjectFinder.new directory_lister}
 
