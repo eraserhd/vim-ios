@@ -32,9 +32,7 @@ module IOS
       private :project_in_this_directory?
 
       def project_in_this_directory
-        projects = projects_in_this_directory
-        return nil if projects.empty?
-        XcodeProject.new File.join(@directory,projects.first)
+        XcodeProject.new File.join(@directory,projects_in_this_directory.first)
       end
       private :project_in_this_directory
 
