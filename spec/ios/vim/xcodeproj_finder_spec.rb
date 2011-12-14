@@ -1,5 +1,11 @@
 require 'ios/vim'
 
+RSpec::Matchers.define :find_project_with_path do |expected|
+  match do |actual|
+    actual.find.path.should == expected
+  end
+end
+
 describe IOS::Vim::XcodeProjectFinder do
 
   context "when it can't find a project folder" do
@@ -25,8 +31,7 @@ describe IOS::Vim::XcodeProjectFinder do
     subject {IOS::Vim::XcodeProjectFinder.new directory_lister}
 
     it "returns an XcodeProject with the correct path" do
-      subject.find.should be_kind_of(IOS::Vim::XcodeProject)
-      subject.find.path.should == "/Foo/bar/baz/Foo.xcodeproj"
+      subject.should find_project_with_path("/Foo/bar/baz/Foo.xcodeproj")
     end
 
   end
@@ -42,8 +47,7 @@ describe IOS::Vim::XcodeProjectFinder do
     subject {IOS::Vim::XcodeProjectFinder.new directory_lister}
 
     it "returns an XcodeProject with the correct path" do
-      subject.find.should be_kind_of(IOS::Vim::XcodeProject)
-      subject.find.path.should == "/Foo/bar/Foo.xcodeproj"
+      subject.should find_project_with_path("/Foo/bar/Foo.xcodeproj")
     end
 
   end
