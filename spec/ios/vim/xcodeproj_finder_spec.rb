@@ -4,10 +4,10 @@ describe IOS::Vim::XcodeProjectFinder do
 
   context "when it can't find a project folder" do
 
-    let!(:filesystem) do
+    let!(:directory_lister) do
       double :current_directory => '/Foo/bar', :list => []
     end
-    subject {IOS::Vim::XcodeProjectFinder.new filesystem}
+    subject {IOS::Vim::XcodeProjectFinder.new directory_lister}
 
     it "returns nil" do
       subject.find.should be_nil
@@ -17,12 +17,12 @@ describe IOS::Vim::XcodeProjectFinder do
 
   context "when there's a .xcodeproj in the current directory" do
 
-    let!(:filesystem) do
-      filesystem = double(:current_directory => '/Foo/bar/baz')
-      filesystem.stub(:list).with('/Foo/bar/baz').and_return(['Foo.xcodeproj'])
-      filesystem
+    let!(:directory_lister) do
+      directory_lister = double(:current_directory => '/Foo/bar/baz')
+      directory_lister.stub(:list).with('/Foo/bar/baz').and_return(['Foo.xcodeproj'])
+      directory_lister
     end
-    subject {IOS::Vim::XcodeProjectFinder.new filesystem}
+    subject {IOS::Vim::XcodeProjectFinder.new directory_lister}
 
     it "returns an XcodeProject with the correct path" do
       subject.find.should be_kind_of(IOS::Vim::XcodeProject)
@@ -33,13 +33,13 @@ describe IOS::Vim::XcodeProjectFinder do
 
   context "when there's a .xcodeproj in a parent directory" do
     
-    let!(:filesystem) do
-      filesystem = double(:current_directory => '/Foo/bar/baz')
-      filesystem.stub(:list).with('/Foo/bar/baz').and_return([])
-      filesystem.stub(:list).with('/Foo/bar').and_return(['Foo.xcodeproj'])
-      filesystem
+    let!(:directory_lister) do
+      directory_lister = double(:current_directory => '/Foo/bar/baz')
+      directory_lister.stub(:list).with('/Foo/bar/baz').and_return([])
+      directory_lister.stub(:list).with('/Foo/bar').and_return(['Foo.xcodeproj'])
+      directory_lister
     end
-    subject {IOS::Vim::XcodeProjectFinder.new filesystem}
+    subject {IOS::Vim::XcodeProjectFinder.new directory_lister}
 
     it "returns an XcodeProject with the correct path" do
       subject.find.should be_kind_of(IOS::Vim::XcodeProject)

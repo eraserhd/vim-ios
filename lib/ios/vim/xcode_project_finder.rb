@@ -3,14 +3,14 @@ module IOS
 
     class XcodeProjectFinder
 
-      def initialize filesystem
-        @filesystem = filesystem
+      def initialize directory_lister
+        @directory_lister = directory_lister
       end
 
       def find
-        directory = @filesystem.current_directory
+        directory = @directory_lister.current_directory
         while true
-          files = @filesystem.list(directory).select{|path| path =~ /\.xcodeproj$/i}
+          files = @directory_lister.list(directory).select{|path| path =~ /\.xcodeproj$/i}
           unless files.empty?
             return XcodeProject.new File.join(directory,files.first)
           end
