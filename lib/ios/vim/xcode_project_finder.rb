@@ -8,7 +8,7 @@ module IOS
       end
 
       def find
-        @directory = @directory_lister.current_directory
+        start_at_current_directory
 
         until at_topmost_directory?
           project = project_in_current_directory
@@ -19,6 +19,11 @@ module IOS
 
         nil
       end
+
+      def start_at_current_directory
+        @directory = @directory_lister.current_directory
+      end
+      private :start_at_current_directory
 
       def project_in_current_directory
         projects = projects_in_current_directory
