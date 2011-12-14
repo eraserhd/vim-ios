@@ -9,18 +9,25 @@ module IOS
 
       def find
         @directory = @directory_lister.current_directory
-        while true
-          files = projects_in_current_directory
-          unless files.empty?
-            return XcodeProject.new File.join(@directory,files.first)
-          end
 
-          break if at_topmost_directory?
+        until at_topmost_directory?
+          project = project_in_current_directory
+          return project if project
+
           @directory = File.dirname(@directory)
         end
 
         nil
       end
+
+      def project_in_current_directory
+        projects = projects_in_current_directory
+        unless projects.empty?
+          return XcodeProject.new File.join(@directory,projects.first)
+        end
+        nil
+      end
+      private :project_in_current_directory
 
       def entries_in_current_directory
         @directory_lister.list @directory
