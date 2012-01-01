@@ -78,6 +78,17 @@ Navigation
 </tr>
 </table>
 
+Feature Requests (and More)
+---------------------------
+
+I use [Trello](http://trello.com) to track development progress.  You can
+vote on new features or watch progress on my [Vim for Objective-C] Trello
+board.
+
+Trello does not seem to allow setting a column to be world-writable at
+the moment.  If you'd like to request a feature, ping me on Twitter
+([@eraserhd](http://twitter.com/#!/eraserhd)) or by e-mail.
+
 Shameless Self-Promotion
 ------------------------
 
@@ -92,3 +103,4 @@ screencasts and charge the small sum of $9 US per month for them.  I also make
 free screencasts and the usual text-style blog posts (also free) from time
 to time.  You can find these at [The Objective Vimmer](http://objvimmer.com/).
 
+[Vim for Objective-C]: https://trello.com/board/vim-for-objective-c/4f007a8bce6a25c1792e669a
