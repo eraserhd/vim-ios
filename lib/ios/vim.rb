@@ -1,5 +1,6 @@
 require 'ios/vim/a_type_classifier'
 require 'ios/vim/alternate_finder'
+require 'ios/vim/command_installer'
 require 'ios/vim/edit_commands'
 require 'ios/vim/filename'
 require 'ios/vim/r_type_classifier'
@@ -10,8 +11,9 @@ module IOS
   module Vim
 
     def self.initialize
-      install_edit_commands
+      CommandInstaller.new(self).install_commands
       install_non_edit_commands
+      install_edit_commands
     end
 
     class <<self
