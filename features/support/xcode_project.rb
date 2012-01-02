@@ -14,11 +14,33 @@ module XcodeProjectHelpers
 
   def add_xcode_group(group_name)
     with_the_xcode_project do |project|
+      #FIXME: push into zerg_xcode 0.4.1 (mkdir, mkdir_p)
+      group = project['mainGroup']
+      group_name.split('/').each do |section|
+        next_group = group['children'].detect {|child| child['name'] == section}
+        if next_group
+          group = next_group
+          next
+        end
+
+        next_group = ZergXcode::Objects::PBXGroup.new 'name' => section,
+                                                      'children' => [],
+                                                      'sourceTree' => "<group>"
+        group.children << next_group
+        group = next_group
+      end
     end
   end
 
   def group_path_exists?(path_name)
     with_the_xcode_project do |project|
+      #FIXME: push into zerg_xcode 0.4.1 (exists?)
+      dir = project['mainGroup']
+      path_name.split('/').each do |section|
+        dir = dir['children'].detect {|child| child['name'] == section}
+        return false if dir.nil?
+      end
+      true
     end
   end
 
@@ -30,8 +52,9 @@ module XcodeProjectHelpers
   def with_the_xcode_project
     initialize_project unless File.exist? 'tmp/Project.xcodeproj/project.pbxproj'
     project = ZergXcode.load 'tmp/Project.xcodeproj/project.pbxproj'
-    yield project
+    result = yield project
     project.save!
+    result
   end
   private :with_the_xcode_project
 

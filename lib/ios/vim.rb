@@ -44,6 +44,7 @@ module IOS
     end
 
     extend EditCommands
+    extend XCommands
 
   end 
 end
