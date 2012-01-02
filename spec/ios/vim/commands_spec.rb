@@ -56,4 +56,11 @@ describe IOS::Vim::Commands do
     end
   end
 
+  describe ':Xadd' do
+    context 'when adding the current file' do
+      it 'uses the given path'
+      it 'uses the given targets'
+    end
+  end
+
 end
