@@ -7,7 +7,7 @@ Given /^my Xcode project has a group "([^"]*)"$/ do |group_name|
   add_xcode_group group_name
 end
 
-Then /^"([^"]*)" will exists in Xcode project$/ do |path_name|
+Then /^"([^"]*)" will exist in Xcode project$/ do |path_name|
   group_path_exists?(path_name).should be_true
 end
 

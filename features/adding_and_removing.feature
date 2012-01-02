@@ -11,7 +11,7 @@ Feature: Adding and removing
     And my Xcode project has a group "Classes"
     And I am editing "foo.cpp"
     When I run ":Xadd Classes Foo,Baz" in Vim
-    Then "Classes/foo.cpp" will exists in Xcode project
+    Then "Classes/foo.cpp" will exist in Xcode project
     And "Classes/foo.cpp" will refer to "foo.cpp"
     And "Classes/foo.cpp" will be in target "Foo"
     And "Classes/foo.cpp" will be in target "Bar"
