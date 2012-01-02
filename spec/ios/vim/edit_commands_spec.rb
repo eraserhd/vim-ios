@@ -2,11 +2,11 @@ require 'ios/vim'
 
 module VIM; class Buffer; end; end
 
-describe IOS::Vim::Commands do
+describe IOS::Vim::EditCommands do
 
   subject do
     o = Object.new
-    o.extend IOS::Vim::Commands
+    o.extend IOS::Vim::EditCommands
     o
   end
 

@@ -1,6 +1,6 @@
 require 'ios/vim/a_type_classifier'
 require 'ios/vim/alternate_finder'
-require 'ios/vim/commands'
+require 'ios/vim/edit_commands'
 require 'ios/vim/filename'
 require 'ios/vim/r_type_classifier'
 require 'ios/vim/related_finder'
@@ -42,7 +42,7 @@ module IOS
 
     end
 
-    extend Commands
+    extend EditCommands
 
   end 
 end

@@ -2,7 +2,7 @@
 module IOS
   module Vim
 
-    module Commands
+    module EditCommands
 
       def edit_command_A(method)
         find_and_edit method, AlternateFinder, :alternate
