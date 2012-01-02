@@ -4,6 +4,7 @@ require 'ios/vim/edit_commands'
 require 'ios/vim/filename'
 require 'ios/vim/r_type_classifier'
 require 'ios/vim/related_finder'
+require 'ios/vim/x_commands'
 
 module IOS
   module Vim
