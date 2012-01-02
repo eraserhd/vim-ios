@@ -11,14 +11,24 @@ module IOS
 
     def self.initialize
       install_edit_commands
+      install_non_edit_commands
     end
 
     class <<self
+
+      def install_non_edit_commands
+        non_edit_commands.each {|command| install_non_edit_command command}
+      end
+      private :install_non_edit_commands
 
       def non_edit_commands
         methods.grep(/^command_/).map {|name| name.to_s.gsub(/^command_/, "").intern}
       end
       private :non_edit_commands
+
+      def install_non_edit_command(command)
+      end
+      private :install_non_edit_command
 
       EDIT_VARIANTS = {
         '' => 'edit',

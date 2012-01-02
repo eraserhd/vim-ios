@@ -15,6 +15,13 @@ describe IOS::Vim do
       IOS::Vim.should_receive(:install_edit_command).with(:Baz)
       IOS::Vim::initialize
     end
+
+    it 'should install detected non-edit commands' do
+      IOS::Vim.stub(:non_edit_commands).and_return([:SlImE, :BaZBaR])
+      IOS::Vim.should_receive(:install_non_edit_command).with(:SlImE)
+      IOS::Vim.should_receive(:install_non_edit_command).with(:BaZBaR)
+      IOS::Vim::initialize
+    end
   end
 
   describe '::edit_commands' do
