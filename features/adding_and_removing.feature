@@ -5,13 +5,11 @@ Feature: Adding and removing
 
   @wip
   Scenario: Xadd
-    Given my Xcode project has the following targets:
-      | Foo |
-      | Bar |
-      | Baz |
-    And my Xcode project has the following groups:
-      | Classes |
-    And I have a file "foo.cpp"
+    Given my Xcode project has a target "Foo"
+    And my Xcode project has a target "Bar"
+    And my Xcode project has a target "Baz"
+    And my Xcode project has a group "Classes"
+    And I am editing "foo.cpp"
     When I run ":Xadd Classes Foo,Baz" in Vim
     Then "Classes/foo.cpp" will exists in Xcode project
     And "Classes/foo.cpp" will refer to "foo.cpp"
