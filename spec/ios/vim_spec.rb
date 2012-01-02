@@ -24,6 +24,13 @@ describe IOS::Vim do
     end
   end
 
+  describe '::commands' do
+    it 'should return :FoBaR if command_FoBaR is defined' do
+      IOS::Vim.instance_eval {class<<self; def command_FoBaR; end; end}
+      IOS::Vim.send(:commands).should include(:FoBaR)
+    end
+  end
+
   describe '::install_edit_command' do
     it 'should map the command for each edit "type"' do
       VIM.stub(:command)

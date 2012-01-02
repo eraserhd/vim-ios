@@ -20,6 +20,11 @@ module IOS
       end
       private :edit_commands
 
+      def commands
+        methods.grep(/^command_/).map {|name| name.to_s.gsub(/^command_/, "").intern}
+      end
+      private :commands
+
       EDIT_VARIANTS = {
         '' => 'edit',
         'E' => 'edit',
