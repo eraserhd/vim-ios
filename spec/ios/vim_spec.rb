@@ -50,4 +50,12 @@ describe IOS::Vim do
     end
   end
 
+  describe '::install_non_edit_command' do
+    it 'should map the command' do
+      VIM.stub(:command)
+      VIM.should_receive(:command).with("autocmd FileType objc,objcpp command! -buffer FooBAR :ruby IOS::Vim::command_FooBAR(<q-args>)<CR>")
+      IOS::Vim.send :install_non_edit_command, :FooBAR
+    end
+  end
+
 end

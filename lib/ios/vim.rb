@@ -27,6 +27,7 @@ module IOS
       private :non_edit_commands
 
       def install_non_edit_command(command)
+        VIM.command("autocmd FileType objc,objcpp command! -buffer #{command} :ruby IOS::Vim::command_#{command}(<q-args>)<CR>")
       end
       private :install_non_edit_command
 
