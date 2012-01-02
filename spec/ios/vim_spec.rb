@@ -24,10 +24,10 @@ describe IOS::Vim do
     end
   end
 
-  describe '::commands' do
+  describe '::non_edit_commands' do
     it 'should return :FoBaR if command_FoBaR is defined' do
       IOS::Vim.instance_eval {class<<self; def command_FoBaR; end; end}
-      IOS::Vim.send(:commands).should include(:FoBaR)
+      IOS::Vim.send(:non_edit_commands).should include(:FoBaR)
     end
   end
 

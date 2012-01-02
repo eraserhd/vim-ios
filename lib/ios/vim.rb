@@ -15,10 +15,10 @@ module IOS
 
     class <<self
 
-      def commands
+      def non_edit_commands
         methods.grep(/^command_/).map {|name| name.to_s.gsub(/^command_/, "").intern}
       end
-      private :commands
+      private :non_edit_commands
 
       EDIT_VARIANTS = {
         '' => 'edit',
