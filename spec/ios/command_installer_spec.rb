@@ -10,14 +10,14 @@ describe IOS::Vim::CommandInstaller do
       subject.stub(:edit_commands).and_return([:FoObAr, :Baz])
       subject.should_receive(:edit_command_script).with(:FoObAr)
       subject.should_receive(:edit_command_script).with(:Baz)
-      subject.send(:script)
+      subject.install_script
     end
 
     it 'should install detected non-edit commands' do
       subject.stub(:non_edit_commands).and_return([:SlImE, :BaZBaR])
       subject.should_receive(:non_edit_command_script).with(:SlImE)
       subject.should_receive(:non_edit_command_script).with(:BaZBaR)
-      subject.send(:script)
+      subject.install_script
     end
   end
 

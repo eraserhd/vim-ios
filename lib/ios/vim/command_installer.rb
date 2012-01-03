@@ -7,13 +7,12 @@ module IOS
       end
 
       def install
-        script.each {|command| VIM.command command}
+        install_script.each {|command| VIM.command command}
       end
 
-      def script
+      def install_script
         non_edit_commands_script + edit_commands_script
       end
-      private :script
 
       def non_edit_commands_script
         non_edit_commands.map{|command| non_edit_command_script command}
