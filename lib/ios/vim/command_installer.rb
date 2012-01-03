@@ -2,6 +2,14 @@ module IOS
   module Vim
     class CommandInstaller
 
+      EDIT_VARIANTS = {
+        '' => 'edit',
+        'E' => 'edit',
+        'V' => 'vsplit',
+        'S' => 'split',
+        'T' => 'tabedit'
+      }
+
       def initialize handler
         @handler = handler
       end
@@ -15,7 +23,7 @@ module IOS
       end
 
       def non_edit_commands_script
-        non_edit_commands.map{|command| non_edit_command_script command}
+        non_edit_commands.map{|command| script_for_non_edit_command command}
       end
       private :non_edit_commands_script
 
@@ -24,31 +32,23 @@ module IOS
       end
       private :non_edit_commands
 
-      def non_edit_command_script(command)
+      def script_for_non_edit_command(command)
         "autocmd FileType objc,objcpp command! -buffer #{command} :ruby IOS::Vim::command_#{command}(<q-args>)<CR>"
       end
-      private :non_edit_command_script
-
-      EDIT_VARIANTS = {
-        '' => 'edit',
-        'E' => 'edit',
-        'V' => 'vsplit',
-        'S' => 'split',
-        'T' => 'tabedit'
-      }
+      private :script_for_non_edit_command
 
       def edit_commands_script
-        edit_commands.map {|command| edit_command_script command}.flatten
+        edit_commands.map {|command| script_for_edit_command command}.flatten
       end
       private :edit_commands_script
 
-      def edit_command_script(command)
+      def script_for_edit_command(command)
         EDIT_VARIANTS.map do |infix, edit_method|
           variant = edit_command_variant command, infix
           "autocmd FileType objc,objcpp command! -buffer #{variant} :ruby IOS::Vim::edit_command_#{command}('#{edit_method}')<CR>"
         end
       end
-      private :edit_command_script
+      private :script_for_edit_command
 
       def edit_commands
         @handler.methods.grep(/^edit_command_/).map {|name| name.to_s.gsub(/^edit_command_/, "").intern}
