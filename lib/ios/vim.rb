@@ -14,7 +14,7 @@ module IOS
     extend XCommands
 
     def self.initialize
-      CommandInstaller.new(self).install_commands
+      CommandInstaller.new(self).install
     end
 
   end 

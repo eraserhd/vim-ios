@@ -5,19 +5,19 @@ describe IOS::Vim::CommandInstaller do
   let(:handler) {Object.new}
   subject {IOS::Vim::CommandInstaller.new handler}
 
-  describe '::install_commands' do
+  describe '::install' do
     it 'should install detected edit commands' do
       subject.stub(:edit_commands).and_return([:FoObAr, :Baz])
       subject.should_receive(:install_edit_command).with(:FoObAr)
       subject.should_receive(:install_edit_command).with(:Baz)
-      subject.install_commands
+      subject.install
     end
 
     it 'should install detected non-edit commands' do
       subject.stub(:non_edit_commands).and_return([:SlImE, :BaZBaR])
       subject.should_receive(:install_non_edit_command).with(:SlImE)
       subject.should_receive(:install_non_edit_command).with(:BaZBaR)
-      subject.install_commands
+      subject.install
     end
   end
 

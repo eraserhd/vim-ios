@@ -6,7 +6,7 @@ module IOS
         @handler = handler
       end
 
-      def install_commands
+      def install
         script.each {|command| VIM.command command}
       end
 
