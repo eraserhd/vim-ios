@@ -7,9 +7,17 @@ module IOS
       end
 
       def install_commands
+        script.each {|command| VIM.command command}
+      end
+
+      def script
+        return @script if @script
+        @script = []
         install_non_edit_commands
         install_edit_commands
+        @script
       end
+      private :script
 
       def install_non_edit_commands
         non_edit_commands.each {|command| install_non_edit_command command}
@@ -22,7 +30,7 @@ module IOS
       private :non_edit_commands
 
       def install_non_edit_command(command)
-        VIM.command("autocmd FileType objc,objcpp command! -buffer #{command} :ruby IOS::Vim::command_#{command}(<q-args>)<CR>")
+        @script << "autocmd FileType objc,objcpp command! -buffer #{command} :ruby IOS::Vim::command_#{command}(<q-args>)<CR>"
       end
       private :install_non_edit_command
 
@@ -42,7 +50,7 @@ module IOS
       def install_edit_command(command)
         EDIT_VARIANTS.each do |infix, edit_method|
           variant = edit_command_variant command, infix
-          VIM.command "autocmd FileType objc,objcpp command! -buffer #{variant} :ruby IOS::Vim::edit_command_#{command}('#{edit_method}')<CR>"
+          @script << "autocmd FileType objc,objcpp command! -buffer #{variant} :ruby IOS::Vim::edit_command_#{command}('#{edit_method}')<CR>"
         end
       end
       private :install_edit_command

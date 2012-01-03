@@ -37,21 +37,21 @@ describe IOS::Vim::CommandInstaller do
 
   describe '::install_edit_command' do
     it 'should map the command for each edit "type"' do
-      VIM.stub(:command)
-      VIM.should_receive(:command).with("autocmd FileType objc,objcpp command! -buffer Foobar :ruby IOS::Vim::edit_command_Foobar('edit')<CR>")
-      VIM.should_receive(:command).with("autocmd FileType objc,objcpp command! -buffer FEoobar :ruby IOS::Vim::edit_command_Foobar('edit')<CR>")
-      VIM.should_receive(:command).with("autocmd FileType objc,objcpp command! -buffer FVoobar :ruby IOS::Vim::edit_command_Foobar('vsplit')<CR>")
-      VIM.should_receive(:command).with("autocmd FileType objc,objcpp command! -buffer FSoobar :ruby IOS::Vim::edit_command_Foobar('split')<CR>")
-      VIM.should_receive(:command).with("autocmd FileType objc,objcpp command! -buffer FToobar :ruby IOS::Vim::edit_command_Foobar('tabedit')<CR>")
+      subject.instance_variable_set :@script, []
       subject.send :install_edit_command, :Foobar
+      subject.send(:script).should include("autocmd FileType objc,objcpp command! -buffer Foobar :ruby IOS::Vim::edit_command_Foobar('edit')<CR>")
+      subject.send(:script).should include("autocmd FileType objc,objcpp command! -buffer FEoobar :ruby IOS::Vim::edit_command_Foobar('edit')<CR>")
+      subject.send(:script).should include("autocmd FileType objc,objcpp command! -buffer FVoobar :ruby IOS::Vim::edit_command_Foobar('vsplit')<CR>")
+      subject.send(:script).should include("autocmd FileType objc,objcpp command! -buffer FSoobar :ruby IOS::Vim::edit_command_Foobar('split')<CR>")
+      subject.send(:script).should include("autocmd FileType objc,objcpp command! -buffer FToobar :ruby IOS::Vim::edit_command_Foobar('tabedit')<CR>")
     end
   end
 
   describe '::install_non_edit_command' do
     it 'should map the command' do
-      VIM.stub(:command)
-      VIM.should_receive(:command).with("autocmd FileType objc,objcpp command! -buffer FooBAR :ruby IOS::Vim::command_FooBAR(<q-args>)<CR>")
+      subject.instance_variable_set :@script, []
       subject.send :install_non_edit_command, :FooBAR
+      subject.send(:script).should == ["autocmd FileType objc,objcpp command! -buffer FooBAR :ruby IOS::Vim::command_FooBAR(<q-args>)<CR>"]
     end
   end
 
