@@ -24,3 +24,16 @@ describe 'IOS::Vim.xcodeproj_interface' do
   end
 
 end
+
+describe IOS::Vim::NoXcodeprojInterface do
+
+  context 'when any method is called' do
+    it 'raises LoadError with a message' do
+      expect {subject.bazzlequux}.to raise_error(
+        LoadError,
+        'This feature requires the zerg_xcode gem.'
+      )
+    end
+  end
+
+end
