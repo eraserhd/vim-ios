@@ -11,28 +11,24 @@ module IOS
       end
 
       def script
-        return @script if @script
-        @script = []
-        install_non_edit_commands
-        install_edit_commands
-        @script
+        non_edit_commands_script + edit_commands_script
       end
       private :script
 
-      def install_non_edit_commands
-        non_edit_commands.each {|command| install_non_edit_command command}
+      def non_edit_commands_script
+        non_edit_commands.map{|command| non_edit_command_script command}
       end
-      private :install_non_edit_commands
+      private :non_edit_commands_script
 
       def non_edit_commands
         @handler.methods.grep(/^command_/).map {|name| name.to_s.gsub(/^command_/, "").intern}
       end
       private :non_edit_commands
 
-      def install_non_edit_command(command)
-        @script << "autocmd FileType objc,objcpp command! -buffer #{command} :ruby IOS::Vim::command_#{command}(<q-args>)<CR>"
+      def non_edit_command_script(command)
+        "autocmd FileType objc,objcpp command! -buffer #{command} :ruby IOS::Vim::command_#{command}(<q-args>)<CR>"
       end
-      private :install_non_edit_command
+      private :non_edit_command_script
 
       EDIT_VARIANTS = {
         '' => 'edit',
@@ -42,18 +38,18 @@ module IOS
         'T' => 'tabedit'
       }
 
-      def install_edit_commands
-        edit_commands.each {|command| install_edit_command command}
+      def edit_commands_script
+        edit_commands.map {|command| edit_command_script command}.flatten
       end
-      private :install_edit_commands
+      private :edit_commands_script
 
-      def install_edit_command(command)
-        EDIT_VARIANTS.each do |infix, edit_method|
+      def edit_command_script(command)
+        EDIT_VARIANTS.map do |infix, edit_method|
           variant = edit_command_variant command, infix
-          @script << "autocmd FileType objc,objcpp command! -buffer #{variant} :ruby IOS::Vim::edit_command_#{command}('#{edit_method}')<CR>"
+          "autocmd FileType objc,objcpp command! -buffer #{variant} :ruby IOS::Vim::edit_command_#{command}('#{edit_method}')<CR>"
         end
       end
-      private :install_edit_command
+      private :edit_command_script
 
       def edit_commands
         @handler.methods.grep(/^edit_command_/).map {|name| name.to_s.gsub(/^edit_command_/, "").intern}

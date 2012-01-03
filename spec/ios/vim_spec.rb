@@ -11,7 +11,7 @@ describe IOS::Vim do
   describe '::initialize' do
     it 'should install commands' do
       installer = mock
-      installer.should_receive(:install_commands)
+      installer.should_receive(:install)
       IOS::Vim::CommandInstaller.should_receive(:new).with(IOS::Vim).and_return(installer)
       IOS::Vim::initialize
     end
