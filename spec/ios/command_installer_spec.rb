@@ -5,7 +5,7 @@ describe IOS::Vim::CommandInstaller do
   let(:handler) {Object.new}
   subject {IOS::Vim::CommandInstaller.new handler}
 
-  describe '::install' do
+  describe '::install_script' do
     it 'should install detected edit commands' do
       subject.stub(:edit_commands).and_return([:FoObAr, :Baz])
       subject.should_receive(:script_for_edit_command).with(:FoObAr)
@@ -35,7 +35,7 @@ describe IOS::Vim::CommandInstaller do
     end
   end
 
-  describe '::install_edit_command' do
+  describe 'script for installing an edit command' do
     let(:script) {subject.send(:script_for_edit_command, :Foobar)}
 
     it 'should map the command for each edit "type"' do
@@ -47,7 +47,7 @@ describe IOS::Vim::CommandInstaller do
     end
   end
 
-  describe '::install_non_edit_command' do
+  describe 'script for installing a non-edit command' do
     it 'should map the command' do
       subject.send(:script_for_non_edit_command, :FooBAR).should == "autocmd FileType objc,objcpp command! -buffer FooBAR :ruby IOS::Vim::command_FooBAR(<q-args>)<CR>"
     end
