@@ -33,7 +33,7 @@ module IOS
       private :non_edit_commands
 
       def script_for_non_edit_command(command)
-        "autocmd FileType objc,objcpp command! -buffer #{command} :ruby IOS::Vim::command_#{command}(<q-args>)<CR>"
+        "autocmd FileType objc,objcpp command! -buffer -nargs=* #{command} :ruby IOS::Vim::command_#{command}(<f-args>)<CR>"
       end
       private :script_for_non_edit_command
 
