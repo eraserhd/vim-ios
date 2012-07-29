@@ -25,7 +25,6 @@ describe IOS::Vim::ClangCompleterizer do
       VIM.should_receive(:command).with('let g:clang_library_path = "/foo/bar"')
       subject.configure_environment
     end
-
   end
 
 end

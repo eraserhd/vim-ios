@@ -3,7 +3,7 @@ module IOS
 
     class ClangCompleterizer
 
-      def initialize libclang_finder
+      def initialize(libclang_finder=LibclangFinder.new)
         @libclang_finder = libclang_finder
       end
 
