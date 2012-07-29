@@ -7,6 +7,7 @@ require 'ios/vim/filename'
 require 'ios/vim/libclang_finder'
 require 'ios/vim/r_type_classifier'
 require 'ios/vim/related_finder'
+require 'ios/vim/shell_command_runner'
 require 'ios/vim/x_commands'
 require 'ios/vim/xcodeproj_interface'
 
