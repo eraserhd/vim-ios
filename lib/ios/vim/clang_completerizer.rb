@@ -3,6 +3,10 @@ module IOS
 
     class ClangCompleterizer
 
+      def initialize libclang_finder
+        @libclang_finder = libclang_finder
+      end
+
       def configure_environment
       end
 
