@@ -1,5 +1,6 @@
 require 'ios/vim/a_type_classifier'
 require 'ios/vim/alternate_finder'
+require 'ios/vim/clang_completerizer'
 require 'ios/vim/command_installer'
 require 'ios/vim/edit_commands'
 require 'ios/vim/filename'
@@ -16,6 +17,7 @@ module IOS
 
     def self.initialize
       CommandInstaller.new(self).install
+      ClangCompleterizer.new.configure_environment
     end
 
   end 
