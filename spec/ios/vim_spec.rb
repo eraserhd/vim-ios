@@ -9,10 +9,14 @@ describe IOS::Vim do
   end
 
   describe '::initialize' do
-    it 'should install commands' do
-      installer = mock
+    let(:installer) {mock}
+
+    before do
+      IOS::Vim::CommandInstaller.stub(:new).with(IOS::Vim).and_return(installer)
+    end
+
+    it 'installs commands' do
       installer.should_receive(:install)
-      IOS::Vim::CommandInstaller.should_receive(:new).with(IOS::Vim).and_return(installer)
       IOS::Vim::initialize
     end
   end
