@@ -6,10 +6,10 @@ module IOS
     class XcodeprojInterface
 
       def self.instance
-        gem 'zerg_xcode', '~> 0.4.0'
+        gem 'zerg_xcode', WANTED_ZERG_XCODE_VERSION
         XcodeprojInterface.new
       rescue LoadError => e
-        raise LoadError.new('This feature requires the zerg_xcode gem.')
+        raise LoadError.new("This feature requires zerg_xcode #{WANTED_ZERG_XCODE_VERSION}.")
       end
     end
 
