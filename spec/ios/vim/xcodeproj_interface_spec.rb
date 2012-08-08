@@ -8,11 +8,8 @@ describe IOS::Vim::XcodeprojInterface do
         IOS::Vim::XcodeprojInterface.stub(:gem).and_raise(LoadError)
       end
 
-      it 'raises a LoadError with a descriptive message' do
-        expect {IOS::Vim::XcodeprojInterface.instance}.to raise_error(
-          LoadError,
-          'This feature requires the zerg_xcode gem.'
-        )
+      it 'raises a LoadError' do
+        expect {IOS::Vim::XcodeprojInterface.instance}.to raise_error(LoadError)
       end
     end
 
