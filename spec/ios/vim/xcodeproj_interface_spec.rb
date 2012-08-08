@@ -11,6 +11,13 @@ describe IOS::Vim::XcodeprojInterface do
       it 'raises a LoadError' do
         expect {IOS::Vim::XcodeprojInterface.instance}.to raise_error(LoadError)
       end
+
+      it 'indicates the required version in the error message' do
+        expect {IOS::Vim::XcodeprojInterface.instance}.to raise_error(
+          LoadError,
+          /#{Regexp.escape(IOS::Vim::WANTED_ZERG_XCODE_VERSION)}/
+        )
+      end
     end
 
     context 'when loading zerg_xcode succeeds' do
