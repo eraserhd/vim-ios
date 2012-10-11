@@ -16,7 +16,7 @@ use:
 
 For Homebrew:
 
-    brew install macvim +ruby
+    brew install macvim --override-system-vim
 
 Once you have a good Vim installed, we move merrily along to installing ios.vim
 itself.  If you have no preference, I recommend using [pathogen.vim].  Once
