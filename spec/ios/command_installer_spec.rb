@@ -49,7 +49,7 @@ describe IOS::Vim::CommandInstaller do
 
   describe 'script for installing a non-edit command' do
     it 'should map the command' do
-      subject.send(:script_for_non_edit_command, :FooBAR).should == "autocmd FileType objc,objcpp command! -buffer -nargs=* FooBAR :ruby IOS::Vim::command_FooBAR(<f-args>)<CR>"
+      subject.send(:script_for_non_edit_command, :FooBAR).should == "command! -nargs=* FooBAR :ruby IOS::Vim::command_FooBAR(<f-args>)<CR>"
     end
   end
 
