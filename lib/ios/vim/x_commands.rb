@@ -12,6 +12,10 @@ module IOS
         print e.to_s
       end
 
+      def command_Xbuild
+        XcodeBuilder.new.build
+      end
+
     end
   end
 end

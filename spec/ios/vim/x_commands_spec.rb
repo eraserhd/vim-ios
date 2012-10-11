@@ -27,6 +27,15 @@ describe IOS::Vim::XCommands do
         subject.command_Xadd 'Foo/Bar', 'TargetA,TargetB'
       end
     end
+
+    describe ':Xbuild' do
+      it 'invokes the Xcode builder' do
+        builder = double
+        IOS::Vim::XcodeBuilder.should_receive(:new).and_return builder
+        builder.should_receive :build
+        subject.command_Xbuild
+      end
+    end
   end
 
   context 'when retrieving an Xcode interface fails' do

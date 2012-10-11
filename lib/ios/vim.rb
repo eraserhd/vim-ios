@@ -9,6 +9,7 @@ require 'ios/vim/r_type_classifier'
 require 'ios/vim/related_finder'
 require 'ios/vim/shell_command_runner'
 require 'ios/vim/x_commands'
+require 'ios/vim/xcode_builder'
 require 'ios/vim/xcodeproj_interface'
 require 'ios/vim/zerg_xcode_version'
 
