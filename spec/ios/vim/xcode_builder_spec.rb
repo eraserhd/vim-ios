@@ -5,7 +5,7 @@ describe IOS::Vim::XcodeBuilder do
 
   it 'shows status message' do
     builder = IOS::Vim::XcodeBuilder.new
-    builder.should_receive(:print).with('Building... ')
+    builder.should_receive(:puts).with('Building... ')
     builder.build
   end
 
