@@ -3,6 +3,7 @@ module IOS
 
     class XcodeBuilder
       def build
+        print 'Building... '
       end
     end
 
