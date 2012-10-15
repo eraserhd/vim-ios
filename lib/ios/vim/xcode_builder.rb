@@ -15,7 +15,7 @@ module IOS
           t = Tempfile.new('xcodebuild-errors')
           t.write output
         else
-          VIM.command('echon "OK"') unless output =~ /\n\*\* BUILD FAILED \*\*/
+          VIM.command('echon "OK"')
         end
       end
     end
