@@ -34,6 +34,13 @@ After which, everything should Just Work(tm).
 [Homebrew]: http://mxcl.github.com/homebrew/
 [MacPorts]: http://www.macports.org/ 
 
+Building Your Project
+---------------------
+
+The `:Xbuild` command will build the Xcode project in Vim's working directory.
+If the build is successful, you will see 'OK' in the status line.  Otherwise,
+the command will put you into quickfix mode so you can fix compilation errors.
+
 Navigation
 ----------
 
