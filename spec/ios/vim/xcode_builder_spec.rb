@@ -28,12 +28,21 @@ describe IOS::Vim::XcodeBuilder do
     end
   end
 
-  context 'when xcodebuild includes "\\n** BUILD FAILED **"' do
+  context 'when xcodebuild output includes "\\n** BUILD FAILED **"' do
     let(:xcodebuild_output) {"flobb \n** BUILD FAILED ** \n "}
-    before {runner.stub(:run).and_return [0, xcodebuild_output]}
+    let(:tmpfile) {double :write => nil}
+    before do
+      Tempfile.stub(:new).and_return tmpfile
+      runner.stub(:run).and_return [0, xcodebuild_output]
+    end
 
     it 'does not tell us "OK"' do
       VIM.should_not_receive(:command).with('echon "OK"')
+      subject.build
+    end
+
+    it 'writes the output to a temporary file' do
+      tmpfile.should_receive(:write).with(xcodebuild_output)
       subject.build
     end
   end

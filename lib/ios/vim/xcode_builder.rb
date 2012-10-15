@@ -1,3 +1,5 @@
+require 'tempfile'
+
 module IOS
   module Vim
 
@@ -9,7 +11,12 @@ module IOS
       def build
         VIM.command('echo "Building... "')
         (_, output) = @shell_command_runner.run 'xcodebuild'
-        VIM.command('echon "OK"') unless output =~ /\n\*\* BUILD FAILED \*\*/
+        if output =~/\n\*\* BUILD FAILED \*\*/
+          t = Tempfile.new('xcodebuild-errors')
+          t.write output
+        else
+          VIM.command('echon "OK"') unless output =~ /\n\*\* BUILD FAILED \*\*/
+        end
       end
     end
 
