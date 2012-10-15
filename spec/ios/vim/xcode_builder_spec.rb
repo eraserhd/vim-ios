@@ -3,10 +3,10 @@ require 'ios/vim'
 module VIM; end
 
 describe IOS::Vim::XcodeBuilder do
-  let(:shell_command_runner) {double :run => [0, ""]}
-  subject {IOS::Vim::XcodeBuilder.new shell_command_runner}
+  let(:runner) {double :run => [0, ""]}
+  subject {IOS::Vim::XcodeBuilder.new runner}
 
-  before(:each) do
+  before do
     VIM.stub(:command)
   end
 
@@ -18,13 +18,13 @@ describe IOS::Vim::XcodeBuilder do
   end
 
   it 'runs xcodebuild' do
-    shell_command_runner.should_receive(:run).with('xcodebuild')
+    runner.should_receive(:run).with('xcodebuild')
     subject.build
   end
 
   context 'when xcodebuild indicates success' do
-    before(:each) do
-      shell_command_runner.stub(:run).and_return [0, ""]
+    before do
+      runner.stub(:run).and_return [0, ""]
     end
 
     it 'tells us "OK"' do
@@ -34,8 +34,10 @@ describe IOS::Vim::XcodeBuilder do
   end
 
   context 'when xcodebuild includes "\\n** BUILD FAILED **"' do
-    before(:each) do
-      shell_command_runner.stub(:run).and_return [0, "flobb \n** BUILD FAILED ** \n "]
+    let(:xcodebuild_output) {"flobb \n** BUILD FAILED ** \n "}
+      
+    before do
+      runner.stub(:run).and_return [0, xcodebuild_output]
     end
 
     it 'does not tell us "OK"' do
