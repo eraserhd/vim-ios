@@ -10,13 +10,18 @@ module IOS
 
       def build
         VIM.command('echo "Building... "')
-        (_, @output) = @shell_command_runner.run 'xcodebuild'
+        run_build
         if build_failed?
           start_quickfix_mode
         else
           VIM.command('echon "OK"')
         end
       end
+
+      def run_build
+        (_, @output) = @shell_command_runner.run 'xcodebuild'
+      end
+      private :run_build
 
       def build_failed?
         @output =~/\n\*\* BUILD FAILED \*\*/
