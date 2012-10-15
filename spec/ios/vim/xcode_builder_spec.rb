@@ -30,7 +30,7 @@ describe IOS::Vim::XcodeBuilder do
 
   context 'when xcodebuild output includes "\\n** BUILD FAILED **"' do
     let(:xcodebuild_output) {"flobb \n** BUILD FAILED ** \n "}
-    let(:tmpfile) {double :write => nil}
+    let(:tmpfile) {double :write => nil, :close => nil, :path => "/abc"}
     before do
       Tempfile.stub(:new).and_return tmpfile
       runner.stub(:run).and_return [0, xcodebuild_output]
@@ -43,6 +43,11 @@ describe IOS::Vim::XcodeBuilder do
 
     it 'writes the output to a temporary file' do
       tmpfile.should_receive(:write).with(xcodebuild_output)
+      subject.build
+    end
+
+    it 'closes the temporary file' do
+      tmpfile.should_receive(:close)
       subject.build
     end
   end

@@ -29,8 +29,9 @@ module IOS
       private :build_failed?
 
       def start_quickfix_mode
-        t = Tempfile.new('xcodebuild-errors')
-        t.write @output
+        tmpfile = Tempfile.new('xcodebuild-errors')
+        tmpfile.write @output
+        tmpfile.close
       end
       private :start_quickfix_mode
     end
