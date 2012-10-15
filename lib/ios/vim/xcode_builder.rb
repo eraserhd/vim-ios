@@ -3,7 +3,8 @@ module IOS
 
     class XcodeBuilder
       def build
-        puts 'Building... '
+        VIM.command('echo "Building... "')
+        VIM.command('echon "OK"')
       end
     end
 
