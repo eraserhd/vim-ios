@@ -33,4 +33,15 @@ describe IOS::Vim::XcodeBuilder do
     end
   end
 
+  context 'when xcodebuild includes "\\n** BUILD FAILED **"' do
+    before(:each) do
+      shell_command_runner.stub(:run).and_return [0, "flobb \n** BUILD FAILED ** \n "]
+    end
+
+    it 'does not tell us "OK"' do
+      VIM.should_not_receive(:command).with('echon "OK"')
+      subject.build
+    end
+  end
+
 end

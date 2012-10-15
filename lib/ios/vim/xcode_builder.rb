@@ -8,8 +8,8 @@ module IOS
 
       def build
         VIM.command('echo "Building... "')
-        @shell_command_runner.run 'xcodebuild'
-        VIM.command('echon "OK"')
+        (_, output) = @shell_command_runner.run 'xcodebuild'
+        VIM.command('echon "OK"') unless output =~ /\n\*\* BUILD FAILED \*\*/
       end
     end
 
