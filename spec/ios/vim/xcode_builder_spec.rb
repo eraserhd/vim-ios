@@ -15,7 +15,7 @@ describe IOS::Vim::XcodeBuilder do
   end
 
   it 'runs xcodebuild' do
-    runner.should_receive(:run).with('xcodebuild')
+    runner.should_receive(:run).with('xcodebuild 2>&1')
     subject.build
   end
 
@@ -48,6 +48,11 @@ describe IOS::Vim::XcodeBuilder do
 
     it 'closes the temporary file' do
       tmpfile.should_receive(:close)
+      subject.build
+    end
+
+    it 'starts quickfix mode with the temporary file' do
+      VIM.should_receive(:command).with('cfile /abc')
       subject.build
     end
   end

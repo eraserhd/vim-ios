@@ -19,7 +19,7 @@ module IOS
       end
 
       def run_build
-        (_, @output) = @shell_command_runner.run 'xcodebuild'
+        (_, @output) = @shell_command_runner.run 'xcodebuild 2>&1'
       end
       private :run_build
 
@@ -32,6 +32,7 @@ module IOS
         tmpfile = Tempfile.new('xcodebuild-errors')
         tmpfile.write @output
         tmpfile.close
+        VIM.command "cfile #{tmpfile.path}"
       end
       private :start_quickfix_mode
     end
