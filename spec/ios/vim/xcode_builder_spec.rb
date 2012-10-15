@@ -3,7 +3,7 @@ require 'ios/vim'
 module VIM; end
 
 describe IOS::Vim::XcodeBuilder do
-  let(:shell_command_runner) {double :run => ""}
+  let(:shell_command_runner) {double :run => [0, ""]}
   subject {IOS::Vim::XcodeBuilder.new shell_command_runner}
 
   before(:each) do
@@ -22,9 +22,15 @@ describe IOS::Vim::XcodeBuilder do
     subject.build
   end
 
-  it 'tells us when it is done building' do
-    VIM.should_receive(:command).with('echon "OK"')
-    subject.build
+  context 'when xcodebuild indicates success' do
+    before(:each) do
+      shell_command_runner.stub(:run).and_return [0, ""]
+    end
+
+    it 'tells us "OK"' do
+      VIM.should_receive(:command).with('echon "OK"')
+      subject.build
+    end
   end
 
 end
