@@ -8,9 +8,9 @@ module IOS
         @shell_command_runner = shell_command_runner
       end
 
-      def build
+      def build(params)
         VIM.command('echo "Building... "')
-        run_build
+        run_build(params)
         if build_failed?
           start_quickfix_mode
         else
@@ -18,10 +18,23 @@ module IOS
         end
       end
 
-      def run_build
-        (_, @output) = @shell_command_runner.run 'xcodebuild 2>&1'
+      def run_build(params)
+        build_cmd = "xcodebuild #{params} 2>&1"
+        (_, @output) = @shell_command_runner.run build_cmd
       end
-      private :run_build
+
+      def install(path, platform)
+        VIM.command('echo "Installing..."')
+        run_install_device(path)
+        VIM.command('echon "Done!"')
+      end
+
+      def run_install_device(path)
+        run_cmd = "fruitstrap install --bundle #{path}"
+        (_, @output) = @shell_command_runner.run(run_cmd)
+     end
+
+     private :run_build
 
       def build_failed?
         @output =~/\n\*\* BUILD FAILED \*\*/

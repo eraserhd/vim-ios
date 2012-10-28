@@ -41,6 +41,16 @@ The `:Xbuild` command will build the Xcode project in Vim's working directory.
 If the build is successful, you will see 'OK' in the status line.  Otherwise,
 the command will put you into quickfix mode so you can fix compilation errors.
 
+Running Your Application
+------------------------
+
+The ':Xinstall' command will install a built application. Please note that
+`fruitstrap` is a dependency that must be in your PATH for installing to work.
+A specific fork of `fruitstrap` is required. Others may work, but only the one
+located [here](https://github.com/dylancopeland/fruitstrap) has been tested.
+Currently, installing to the simulator is __not__ supported however adding
+support is in the pipeline.
+
 Navigation
 ----------
 
