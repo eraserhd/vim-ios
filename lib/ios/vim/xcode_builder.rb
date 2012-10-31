@@ -8,7 +8,7 @@ module IOS
         @shell_command_runner = shell_command_runner
       end
 
-      def build(params)
+      def build(params=nil)
         VIM.command('echo "Building... "')
         run_build(params)
         if build_failed?
