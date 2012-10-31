@@ -11,12 +11,12 @@ describe IOS::Vim::XcodeBuilder do
 
   it 'tells us it is building' do
     VIM.should_receive(:command).with('echo "Building... "')
-    subject.build
+    subject.build(nil)
   end
 
   it 'runs xcodebuild' do
     runner.should_receive(:run).with('xcodebuild 2>&1')
-    subject.build
+    subject.build(nil)
   end
 
   context 'when xcodebuild indicates success' do
@@ -24,7 +24,7 @@ describe IOS::Vim::XcodeBuilder do
 
     it 'tells us "OK"' do
       VIM.should_receive(:command).with('echon "OK"')
-      subject.build
+      subject.build(nil)
     end
   end
 
@@ -38,22 +38,22 @@ describe IOS::Vim::XcodeBuilder do
 
     it 'does not tell us "OK"' do
       VIM.should_not_receive(:command).with('echon "OK"')
-      subject.build
+      subject.build(nil)
     end
 
     it 'writes the output to a temporary file' do
       tmpfile.should_receive(:write).with(xcodebuild_output)
-      subject.build
+      subject.build(nil)
     end
 
     it 'closes the temporary file' do
       tmpfile.should_receive(:close)
-      subject.build
+      subject.build(nil)
     end
 
     it 'starts quickfix mode with the temporary file' do
       VIM.should_receive(:command).with('cfile /abc')
-      subject.build
+      subject.build(nil)
     end
   end
 

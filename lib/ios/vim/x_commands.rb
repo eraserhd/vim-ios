@@ -13,8 +13,13 @@ module IOS
             end
 
             def command_Xbuild
-                build_file = File.open("#{Dir.pwd}/.build") 
-                build_params = build_file.read.gsub("\n","  ")
+                begin
+                    build_file = File.open("#{Dir.pwd}/.build") 
+                    build_params = build_file.read.gsub("\n","  ")
+                rescue
+                    build_params = nil
+                end
+
                 XcodeBuilder.new.build(build_params)
             end
 

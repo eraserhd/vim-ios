@@ -19,8 +19,12 @@ module IOS
       end
 
       def run_build(params)
-        build_cmd = "xcodebuild #{params} 2>&1"
-        (_, @output) = @shell_command_runner.run build_cmd
+          if (params)
+              params = params + ' '
+          end
+          build_cmd = "xcodebuild #{params}2>&1"
+          
+          (_, @output) = @shell_command_runner.run build_cmd
       end
 
       def install(path, platform)
