@@ -19,6 +19,11 @@ describe IOS::Vim::XcodeBuilder do
     subject.build
   end
 
+  it 'passes extra parameters to xcodebuild' do
+    runner.should_receive(:run).with('xcodebuild -foo -bar -baz "hello" 2>&1')
+    subject.build('-foo -bar -baz "hello"')
+  end
+
   context 'when xcodebuild indicates success' do
     before {runner.stub(:run).and_return [0, ""]}
 
