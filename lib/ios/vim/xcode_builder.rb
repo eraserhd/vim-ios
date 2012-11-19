@@ -19,11 +19,8 @@ module IOS
       end
 
       def run_build(params)
-        if (params)
-          params = params + ' '
-        end
+        params = params+' ' if params
         build_cmd = "xcodebuild #{params}2>&1"
-
         (_, @output) = @shell_command_runner.run build_cmd
       end
       private :run_build
@@ -42,6 +39,7 @@ module IOS
         run_cmd = "fruitstrap install --bundle #{path}"
         (_, @output) = @shell_command_runner.run(run_cmd)
       end
+      private :run_install_device
 
       def build_failed?
         @output =~/\n\*\* BUILD FAILED \*\*/
