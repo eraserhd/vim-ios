@@ -12,7 +12,7 @@ endif
 
 let s:LibPath = expand('<sfile>:h:h') . '/lib'
 execute "ruby $:.push('" . s:LibPath . "')"
-execute "ruby require 'ios/vim'" 
+ruby require 'ios/vim'
 ruby IOS::Vim::initialize
 
 if has('autocmd')
