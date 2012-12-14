@@ -28,12 +28,19 @@ module IOS
 
     def self.escape_filename(filename)
       return '\\-' if filename == '-'
-      result = filename.gsub(/([#{Regexp.quote(FILENAME_SPECIAL_CHARACTERS)}])/) {|match| '\\' + match}
-      if result.start_with?('+') || result.start_with?('>')
-        '\\' + result
-      else
-        result
+      with_escape_before_leading_special(with_backslash_before_internal_specials(filename))
+    end
+
+    class <<self
+      def with_backslash_before_internal_specials(filename)
+        filename.gsub(/([#{Regexp.quote(FILENAME_SPECIAL_CHARACTERS)}])/) {'\\' + $1}
       end
+      private :with_backslash_before_internal_specials
+
+      def with_escape_before_leading_special(filename)
+        filename.gsub(/^([+>])/) {'\\' + $1}
+      end
+      private :with_escape_before_leading_special
     end
 
   end 
