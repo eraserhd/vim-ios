@@ -24,8 +24,10 @@ module IOS
       ClangCompleterizer.new.configure_environment
     end
 
+    FILENAME_SPECIAL_CHARACTERS = " \t\n*?[{`$\\%#'\"|!<"
+
     def self.escape_filename(filename)
-      filename.gsub(/([ \t\n\*?\[{`$\\%#'\"\|!<])/) {|match| "\\#{match}"}
+      filename.gsub(/([#{Regexp.quote(FILENAME_SPECIAL_CHARACTERS)}])/) {|match| "\\#{match}"}
     end
 
   end 
