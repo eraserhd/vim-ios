@@ -21,7 +21,8 @@ module IOS
       end
 
       def find_and_edit(method, finder, what)
-        VIM.command "#{method} #{finder.new(VIM::Buffer.current.name).send what}"
+        filename = finder.new(VIM::Buffer.current.name).send what
+        VIM.command "#{method} #{IOS::Vim.escape_filename filename}"
       end
       private :find_and_edit
 

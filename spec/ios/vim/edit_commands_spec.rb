@@ -23,7 +23,7 @@ describe IOS::Vim::EditCommands do
 
   def with_finder(kind, stub_params)
     kind.should_receive(:new).with(@filename).and_return(stub stub_params)
-    @found_file = stub_params.values.first
+    @found_file = IOS::Vim.escape_filename(stub_params.values.first)
     self
   end
 
@@ -35,6 +35,10 @@ describe IOS::Vim::EditCommands do
   describe ':A' do
     it "emits the edit command for the alternate" do
       command(:A).when_editing('FooFile.m').with_finder(IOS::Vim::AlternateFinder, :alternate => 'FooFile.h').should_edit_found_file
+    end
+
+    it "escapes the filename" do
+      command(:A).when_editing('Foo File.m').with_finder(IOS::Vim::AlternateFinder, :alternate => 'Foo File.h').should_edit_found_file
     end
   end
 
