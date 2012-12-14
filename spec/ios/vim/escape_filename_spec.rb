@@ -25,4 +25,8 @@ describe 'IOS::Vim.escape_filename' do
     IOS::Vim.escape_filename('>Hello').should eq('\\>Hello')
   end
 
+  it 'escapes a lone "-"' do
+    IOS::Vim.escape_filename('-').should eq('\\-')
+  end
+
 end
