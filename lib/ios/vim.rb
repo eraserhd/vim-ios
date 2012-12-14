@@ -25,7 +25,7 @@ module IOS
     end
 
     def self.escape_filename(filename)
-      filename
+      filename.gsub(/( )/) {|match| "\\#{match}"}
     end
 
   end 
