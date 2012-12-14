@@ -24,5 +24,9 @@ module IOS
       ClangCompleterizer.new.configure_environment
     end
 
+    def self.escape_filename(filename)
+      filename
+    end
+
   end 
 end
