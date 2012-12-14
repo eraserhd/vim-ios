@@ -28,7 +28,7 @@ module IOS
 
     def self.escape_filename(filename)
       result = filename.gsub(/([#{Regexp.quote(FILENAME_SPECIAL_CHARACTERS)}])/) {|match| '\\' + match}
-      if result.start_with? '+'
+      if result.start_with?('+') || result.start_with?('>')
         '\\' + result
       else
         result

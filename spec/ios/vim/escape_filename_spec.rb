@@ -20,5 +20,9 @@ describe 'IOS::Vim.escape_filename' do
   it 'escapes a leading "+"' do
     IOS::Vim.escape_filename('+Hello').should eq('\\+Hello')
   end
+  
+  it 'escapes a leading ">"' do
+    IOS::Vim.escape_filename('>Hello').should eq('\\>Hello')
+  end
 
 end
